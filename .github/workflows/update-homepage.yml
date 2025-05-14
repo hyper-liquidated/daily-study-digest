@@ -2,7 +2,7 @@ name: Auto Update Homepage
 
 on:
   schedule:
-    - cron: '0 10 * * *'  # 5:00 AM EST
+    - cron: '0 10 * * *'
   workflow_dispatch:
 
 jobs:
@@ -12,17 +12,19 @@ jobs:
     steps:
       - name: Checkout your repo
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download updated index.html
         run: curl -o index.html https://hyper-liquidated.github.io/daily-study-digest-source/index.html
 
       - name: Configure Git
         run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
 
       - name: Commit and push changes
         run: |
           git add index.html
           git diff --cached --quiet || git commit -m "Update homepage"
-          git push
+          git push origin main
