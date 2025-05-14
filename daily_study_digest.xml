@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<rss version="2.0">
+  <channel>
+    <title>Daily Study Digest – Track 1 + Track 2</title>
+    <link>https://your-custom-digest.ai</link>
+    <description>Daily curated studies in behavioral science, crypto, and finance.</description>
+    <item>
+      <title>[Track 1] The Paradox of Choice Revisited</title>
+      <description>&lt;b&gt;Source:&lt;/b&gt; Journal of Experimental Psychology: General, 2024&lt;br/&gt;&lt;b&gt;Summary:&lt;/b&gt; Revisits the famous 'jam experiment' and finds that while more options attract attention, fewer choices consistently result in higher satisfaction and faster decision-making.&lt;br/&gt;&lt;b&gt;Why it’s notable:&lt;/b&gt; Strong update to a classic behavioral insight, with real-world implications for design, marketing, and productivity.</description>
+      <pubDate>Wed, 14 May 2025 08:44:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>[Track 1] The Inheritance Lottery: How Family Wealth Shapes Risk-Taking and Innovation</title>
+      <description>&lt;b&gt;Source:&lt;/b&gt; Quarterly Journal of Economics, 2024&lt;br/&gt;&lt;b&gt;Summary:&lt;/b&gt; Uses Swedish data to show that unexpected inheritances lead to more entrepreneurship and risk-taking — but only among top wealth holders.&lt;br/&gt;&lt;b&gt;Why it’s notable:&lt;/b&gt; Sharp insight into inequality, incentive structures, and intergenerational dynamics.</description>
+      <pubDate>Wed, 14 May 2025 08:44:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>[Track 2] Rollups &amp; Data Availability: Why Scaling Isn’t Just About Throughput</title>
+      <description>&lt;b&gt;Source:&lt;/b&gt; Ethereum Foundation, Celestia, StarkWare blogs&lt;br/&gt;&lt;b&gt;Tags:&lt;/b&gt; [Protocol], [Core], [Interested]&lt;br/&gt;&lt;b&gt;Summary:&lt;/b&gt; Rollups bundle transactions off-chain and post results on-chain. But without guaranteed data availability, they risk censorship and unverifiable state transitions.&lt;br/&gt;&lt;b&gt;Why it matters:&lt;/b&gt; DA ensures that rollups stay decentralized and secure. It’s the backbone of Ethereum’s scalability roadmap via EIP-4844 and modular chains.&lt;br/&gt;&lt;b&gt;Applications:&lt;/b&gt; Ethereum scaling (zkSync, Optimism), modular chains (Celestia), restaking DA (EigenDA).&lt;br/&gt;&lt;b&gt;Related tools/projects:&lt;/b&gt; Celestia, Proto-Danksharding, EigenDA, RollCall</description>
+      <pubDate>Wed, 14 May 2025 08:44:49 +0000</pubDate>
+    </item>
+    <item>
+      <title>[Track 2] Latency Arbitrage and the Hidden Economics of Speed</title>
+      <description>&lt;b&gt;Source:&lt;/b&gt; Budish, Cramton &amp; Shim (2015 + 2023 follow-ons)&lt;br/&gt;&lt;b&gt;Tags:&lt;/b&gt; [Market Design], [Core], [Interested]&lt;br/&gt;&lt;b&gt;Summary:&lt;/b&gt; High-frequency traders profit by reacting milliseconds faster to new data. This behavior distorts price discovery and creates a costly arms race.&lt;br/&gt;&lt;b&gt;Why it matters:&lt;/b&gt; Billions are spent on speed with no social gain. Alternatives like frequent batch auctions or speed bumps (e.g. IEX) aim to neutralize this inefficiency.&lt;br/&gt;&lt;b&gt;Applications:&lt;/b&gt; Fairer exchange design, DeFi MEV mitigation, batch settlement protocols.&lt;br/&gt;&lt;b&gt;Related tools/projects:&lt;/b&gt; IEX, CowSwap, Flashbots, Jito (Solana)</description>
+      <pubDate>Wed, 14 May 2025 08:44:49 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
