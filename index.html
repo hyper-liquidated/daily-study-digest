@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Social Layer + Architectures of Capital</title>
   <style>
     body {
@@ -47,19 +48,61 @@
       background-color: #111;
       color: #eee;
     }
-    .toggle-btn {
+
+    /* Toggle switch styling */
+    .toggle-container {
       position: fixed;
       top: 1em;
       right: 1em;
-      background: none;
-      border: none;
-      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+      z-index: 1000;
+    }
+
+    .toggle-switch {
+      width: 60px;
+      height: 30px;
+      background-color: #ccc;
+      border-radius: 30px;
+      position: relative;
       cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .toggle-switch::before {
+      content: '';
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background-color: #fff;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s;
+      box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    }
+
+    .toggle-switch.dark::before {
+      transform: translateX(30px);
+    }
+
+    .icon {
+      font-size: 1.2em;
+    }
+
+    @media (max-width: 600px) {
+      body { font-size: 1.05em; }
     }
   </style>
 </head>
 <body>
-  <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
+
+  <div class="toggle-container">
+    <span class="icon">☀️</span>
+    <div class="toggle-switch" onclick="toggleDarkMode()" id="darkToggle"></div>
+    <span class="icon">🌙</span>
+  </div>
 
   <h1>The Social Layer</h1>
 
@@ -84,25 +127,26 @@
   <h1>Architectures of Capital</h1>
 
   <div class="study">
-    <p><strong>2. Deep Dive: What Is a Zero-Knowledge Proof (ZKP) and Why Should You Care?</strong></p>
+    <strong><u>What Is a Zero-Knowledge Proof (ZKP) and Why Should You Care?</u></strong><br>
+    <span class="track-label">(Originally from Batch 11, #2)</span>
 
-    <p><strong>Basic idea:</strong><br>
-    A ZKP lets you prove that you know something — say, the password to a wallet, or that a transaction was valid — without revealing the details of what you know.</p>
+    <span class="label">Basic idea:</span>
+    <p>A ZKP lets you prove that you know something — say, the password to a wallet, or that a transaction was valid — without revealing the details of what you know.</p>
 
-    <p><strong>Example:</strong><br>
-    Imagine proving you’re over 18 without showing your birthday. A ZKP can do that — it proves the logic of the claim (age > 18) without exposing personal info.</p>
+    <span class="label">Example:</span>
+    <p>Imagine proving you’re over 18 without showing your birthday. A ZKP can do that — it proves the logic of the claim (age > 18) without exposing personal info.</p>
 
-    <p><strong>Why it's powerful in crypto:</strong></p>
+    <span class="label">Why it's powerful in crypto:</span>
     <ul>
       <li><strong>Privacy:</strong> Hide wallet balances, transaction amounts, or identity — while still proving legitimacy.</li>
       <li><strong>Scalability:</strong> Bundle thousands of transactions into one proof (used in zk-rollups) and post it on Ethereum or another Layer 1.</li>
       <li><strong>Security:</strong> Prove off-chain computation was done correctly — think AI inference, or financial data pipelines.</li>
     </ul>
 
-    <p><strong>Recursive SNARKs = Superpowers:</strong><br>
-    Recursive proofs let you nest ZKPs, so one small proof can verify thousands of others. It’s like compressing a 10,000-page report into a verified one-page summary — and having the summary itself be provable.</p>
+    <span class="label">Recursive SNARKs = Superpowers:</span>
+    <p>Recursive proofs let you nest ZKPs, so one small proof can verify thousands of others. It’s like compressing a 10,000-page report into a verified one-page summary — and having the summary itself be provable.</p>
 
-    <p><strong>Projects using this:</strong></p>
+    <span class="label">Projects using this:</span>
     <ul>
       <li>Zcash (privacy)</li>
       <li>Polygon zkEVM (scaling Ethereum)</li>
@@ -113,6 +157,7 @@
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
+      document.getElementById('darkToggle').classList.toggle('dark');
     }
   </script>
 </body>
