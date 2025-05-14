@@ -6,9 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Social Layer + Architectures of Capital</title>
   <style>
-    :root {
-      color-scheme: light dark;
-    }
     body {
       font-family: sans-serif;
       max-width: 720px;
@@ -26,7 +23,7 @@
       margin-top: 2em;
     }
     .study {
-      margin-bottom: 2em;
+      margin-bottom: 2.5em;
     }
     .track-label {
       font-size: 0.9em;
@@ -34,7 +31,7 @@
     }
     .label {
       display: block;
-      font-weight: 600;
+      font-weight: bold;
       margin-top: 0.6em;
       margin-bottom: 0.2em;
       color: #444;
@@ -51,18 +48,18 @@
       background-color: #111;
       color: #eee;
     }
-    .dark-mode .label {
-      color: #ccc;
-    }
-    .dark-mode .track-label {
-      color: #aaa;
-    }
-      background-color: #111;
-      color: #eee;
-    }
 
     /* Toggle switch styling */
     .toggle-container {
+      position: fixed;
+      top: 1em;
+      right: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+      padding: 0.2em;
+      z-index: 1000;
+    }
       position: fixed;
       top: 1em;
       right: 1em;
@@ -73,6 +70,15 @@
     }
 
     .toggle-switch {
+      width: 60px;
+      height: 30px;
+      background-color: #ccc;
+      border-radius: 30px;
+      position: relative;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      box-shadow: 0 0 4px rgba(0,0,0,0.2);
+    }
       width: 60px;
       height: 30px;
       background-color: #ccc;
@@ -110,13 +116,7 @@
 </head>
 <body>
 
-  <div class="toggle-container" style="position: fixed; top: 1em; right: 1em; z-index: 1000;">
-  <label style="display: flex; align-items: center; gap: 0.5em; cursor: pointer;">
-    <span>☀️</span>
-    <input type="checkbox" id="darkToggle" onchange="toggleDarkMode()" style="appearance: none; width: 50px; height: 26px; background: #ccc; border-radius: 13px; position: relative; outline: none;">
-    <span>🌙</span>
-  </label>
-</div>
+  <div class="toggle-container">
     <span class="icon">☀️</span>
     <div class="toggle-switch" onclick="toggleDarkMode()" id="darkToggle"></div>
     <span class="icon">🌙</span>
@@ -173,9 +173,6 @@
   </div>
 
   <script>
-function toggleDarkMode() {
-  document.body.classList.toggle('dark-mode');
-}
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
       document.getElementById('darkToggle').classList.toggle('dark');
