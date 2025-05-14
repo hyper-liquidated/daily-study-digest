@@ -1,12 +1,10 @@
-
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>The Social Layer + Architectures of Capital</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Social Layer + Architectures of Capital</title>
+  <style>
     body {
       font-family: sans-serif;
       max-width: 720px;
@@ -17,6 +15,20 @@
       background-color: #fff;
       transition: background-color 0.3s, color 0.3s;
     }
+    .dark-mode {
+      background-color: #111;
+      color: #eee;
+    }
+    .toggle-btn {
+      position: fixed;
+      top: 1em;
+      right: 1em;
+      background: none;
+      border: none;
+      font-size: 1.5em;
+      cursor: pointer;
+      z-index: 1000;
+    }
     h1 {
       font-size: 1.8em;
       border-bottom: 2px solid #ccc;
@@ -24,9 +36,9 @@
       margin-top: 2em;
     }
     .study {
-      margin-bottom: 2.5em;
+      margin-bottom: 2em;
     }
-    .track-label {
+    .source {
       font-size: 0.9em;
       color: #666;
     }
@@ -45,126 +57,124 @@
       margin-bottom: 0.8em;
       padding-left: 1.2em;
     }
-    .dark-mode {
-      background-color: #111;
-      color: #eee;
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 0.5em 0 1em 0;
     }
-
-    /* Toggle switch styling */
-    .toggle-container {
-      position: fixed;
-      top: 1em;
-      right: 1em;
-      display: flex;
-      align-items: center;
-      gap: 0.4em;
-      padding: 0.2em;
-      z-index: 1000;
-    }
-      position: fixed;
-      top: 1em;
-      right: 1em;
-      display: flex;
-      align-items: center;
-      gap: 0.3em;
-      z-index: 1000;
-    }
-
-    .toggle-switch {
-      width: 60px;
-      height: 30px;
-      background-color: #ccc;
-      border-radius: 30px;
-      position: relative;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      box-shadow: 0 0 4px rgba(0,0,0,0.2);
-    }
-      width: 60px;
-      height: 30px;
-      background-color: #ccc;
-      border-radius: 30px;
-      position: relative;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .toggle-switch::before {
-      content: '';
-      position: absolute;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background-color: #fff;
-      top: 2px;
-      left: 2px;
-      transition: transform 0.3s;
-      box-shadow: 0 0 4px rgba(0,0,0,0.3);
-    }
-
-    .toggle-switch.dark::before {
-      transform: translateX(30px);
-    }
-
-    .icon {
-      font-size: 1.2em;
-    }
-
     @media (max-width: 600px) {
       body { font-size: 1.05em; }
     }
   </style>
 </head>
-<body><section>
-<h2>The Social Layer</h2>
-<hr/>
-<div class="study">
-<p><strong><u>The Paradox of Choice Revisited</u></strong><br/>
-<span class="source">Journal of Experimental Psychology: General, 2024</span></p>
-<p><strong>Summary:</strong><br/>Revisits the famous 'jam experiment' and finds that fewer choices consistently result in faster decisions and greater satisfaction.</p>
-<p><strong>Why it’s notable:</strong><br/>Strong real-world implications for marketing, UI design, and productivity systems.</p>
-</div>
-<div class="study">
-<p><strong><u>The Inheritance Lottery: How Family Wealth Shapes Risk-Taking and Innovation</u></strong><br/>
-<span class="source">Quarterly Journal of Economics, 2024</span></p>
-<p><strong>Summary:</strong><br/>Shows unexpected inheritances increase entrepreneurship — but only among top-wealth households.</p>
-<p><strong>Why it’s notable:</strong><br/>Fresh look at wealth inequality’s influence on ambition and innovation.</p>
-</div>
-<div class="study">
-<p><strong><u>Attention, Not Just Intention: What Drives Civic Engagement?</u></strong><br/>
-<span class="source">American Political Science Review, 2023</span></p>
-<p><strong>Summary:</strong><br/>Finds that increased cognitive attention—not just political interest—predicts higher voter turnout and civic behavior.</p>
-<p><strong>Why it’s notable:</strong><br/>Reframes how we think about ‘apathy’ in democratic decline.</p>
-</div>
-<div class="study">
-<p><strong><u>Algorithmic Fairness as Procedural Justice</u></strong><br/>
-<span class="source">Nature Human Behaviour, 2023</span></p>
-<p><strong>Summary:</strong><br/>People judge AI decisions as more fair when they believe the process—rather than outcome—was fair.</p>
-<p><strong>Why it’s notable:</strong><br/>Key insight for building trust in automated systems.</p>
-</div>
-<div class="study">
-<p><strong><u>City Blocks and Social Capital: How Urban Layout Shapes Community Trust</u></strong><br/>
-<span class="source">Urban Studies Journal, 2024</span></p>
-<p><strong>Summary:</strong><br/>Dense street grids with walkable blocks correlate with higher local trust and informal help between neighbors.</p>
-<p><strong>Why it’s notable:</strong><br/>Evidence for how physical design influences societal cohesion.</p>
-</div>
-</section><section>
-<h2>Architectures of Capital</h2>
-<hr/>
-<div class="study">
-<p><strong><u>What Is a Zero-Knowledge Proof (ZKP) and Why Should You Care?</u></strong><br/><span class="source">(Originally from Batch 11, #2)</span></p>
-<p><strong>Basic idea:</strong><br/>A ZKP lets you prove that you know something — say, the password to a wallet, or that a transaction was valid — without revealing the details of what you know.</p><p><strong>Example:</strong><br/>Imagine proving you’re over 18 without showing your birthday. A ZKP can do that — it proves the logic of the claim (age &gt; 18) without exposing personal info.</p><p><strong>Why it matters:</strong><ul><li>Privacy: Hide wallet balances, transaction amounts, or identity — while still proving legitimacy.</li><li>Scalability: Bundle thousands of transactions into one proof (used in zk-rollups) and post it on Ethereum or another Layer 1.</li><li>Security: Prove off-chain computation was done correctly — think AI inference, or financial data pipelines.</li></ul></p><p><strong>Recursive SNARKs = Superpowers:</strong><br/>Recursive proofs let you nest ZKPs, so one small proof can verify thousands of others — like compressing a 10,000-page report into a single verified summary.</p><p><strong>Tools:</strong><br/>Zcash, Polygon zkEVM, Mina Protocol</p></div>
-<div class="study">
-<p><strong><u>Latency Arbitrage and the Hidden Economics of Speed</u></strong><br/><span class="source">(Originally from Batch 10, #4)</span></p>
-<p><strong>Basic idea:</strong><br/>High-frequency traders exploit milliseconds for profit — at the cost of efficiency.</p><p><strong>Why it matters:</strong><ul><li>Reinforces need for exchange reforms like IEX, MEV protection in DeFi.</li></ul></p><p><strong>Applications:</strong><br/>Fair market design, batch auctions</p><p><strong>Tools:</strong><br/>CowSwap, Flashbots, Jito</p></div>
-<div class="study">
-<p><strong><u>Rollups &amp; Data Availability: Why Scaling Isn’t Just About Throughput</u></strong><br/><span class="source">(Originally from Batch 10, #3)</span></p>
-<p><strong>Basic idea:</strong><br/>Rollups batch transactions, but without guaranteed data availability, they risk censorship and broken trust.</p><p><strong>Why it matters:</strong><ul><li>This underpins Ethereum’s future. Data availability is crucial for modular security and scaling.</li></ul></p><p><strong>Applications:</strong><br/>zkSync, Celestia, EigenDA</p><p><strong>Tools:</strong><br/>Proto-Danksharding, RollCall</p></div>
-<div class="study">
-<p><strong><u>Synthetic Assets and Real-World Risk: A Primer</u></strong><br/><span class="source">(Originally from Batch 10, #1)</span></p>
-<p><strong>Basic idea:</strong><br/>Explains how DeFi protocols replicate traditional financial assets like stocks and commodities using collateralized tokens.</p><p><strong>Why it matters:</strong><ul><li>Helps unbanked users access synthetic exposure, but raises questions about oracle risk, liquidity, and regulation.</li></ul></p><p><strong>Applications:</strong><br/>Mirror Protocol, Synthetix</p><p><strong>Tools:</strong><br/>UMA, Chainlink, RedStone</p></div>
-<div class="study">
-<p><strong><u>Restaking and Economic Security in EigenLayer</u></strong><br/><span class="source">(Originally from Batch 9, #5)</span></p>
-<p><strong>Basic idea:</strong><br/>Analyzes how Ethereum validators can ‘restake’ their ETH to secure additional networks like EigenLayer.</p><p><strong>Why it matters:</strong><ul><li>Introduces modular security-as-a-service but also risk of slashing contagion.</li></ul></p><p><strong>Applications:</strong><br/>EigenLayer AVSs, dual staking</p><p><strong>Tools:</strong><br/>EigenDA, SSV, AVS Registry</p></div>
-</section></body>
+<body>
+
+  <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
+
+  <h1>The Social Layer</h1>
+  <hr>
+
+  <div class="study">
+    <strong><u>The Paradox of Choice Revisited</u></strong><br>
+    <span class="source">Source: Journal of Experimental Psychology: General, 2024</span>
+    <span class="label">Summary:</span>
+    <p>Revisits the famous 'jam experiment' and finds that fewer choices consistently result in faster decisions and greater satisfaction.</p>
+    <span class="label">Why it’s notable:</span>
+    <p>Strong real-world implications for marketing, UI design, and productivity systems.</p>
+  </div>
+
+  <div class="study">
+    <strong><u>The Inheritance Lottery: How Family Wealth Shapes Risk-Taking and Innovation</u></strong><br>
+    <span class="source">Source: Quarterly Journal of Economics, 2024</span>
+    <span class="label">Summary:</span>
+    <p>Shows unexpected inheritances increase entrepreneurship — but only among top-wealth households.</p>
+    <span class="label">Why it’s notable:</span>
+    <p>Fresh look at wealth inequality’s influence on ambition and innovation.</p>
+  </div>
+
+  <div class="study">
+    <strong><u>How Cities Shape Mental Health: Noise, Density, and Access</u></strong><br>
+    <span class="source">Source: Lancet Public Health, 2023</span>
+    <span class="label">Summary:</span>
+    <p>Analyzes mental health outcomes across 30+ cities. Green space and access to services reduce anxiety, while noise and isolation increase risk.</p>
+    <span class="label">Why it’s notable:</span>
+    <p>Links urban policy and mental health — with strong implications for zoning, noise control, and walkability.</p>
+  </div>
+
+  <div class="study">
+    <strong><u>The Scarcity Mindset Revisited: Cognitive Load or Learned Helplessness?</u></strong><br>
+    <span class="source">Source: Nature Human Behaviour, 2024</span>
+    <span class="label">Summary:</span>
+    <p>Re-examines the effect of financial scarcity on decision-making, suggesting a learned helplessness framework over bandwidth tax.</p>
+    <span class="label">Why it’s notable:</span>
+    <p>Challenges a popular behavioral theory with new empirical evidence.</p>
+  </div>
+
+  <div class="study">
+    <strong><u>Algorithmic Nudges for Civic Participation</u></strong><br>
+    <span class="source">Source: PNAS, 2023</span>
+    <span class="label">Summary:</span>
+    <p>Shows that simple email nudges increase voter turnout and civic activity more effectively than social media campaigns.</p>
+    <span class="label">Why it’s notable:</span>
+    <p>Applies behavioral nudging to real-world democracy-building with strong statistical backing.</p>
+  </div>
+
+  <h1>Architectures of Capital</h1>
+  <hr>
+
+  <div class="study">
+    <strong><u>What Is a Zero-Knowledge Proof (ZKP) and Why Should You Care?</u></strong><br>
+    <span class="source">Source: Ethereum Foundation blog series, 2024</span>
+    <span class="label">Summary (Plain-English):</span>
+    <p>A ZKP lets you prove you know something — for example, the password to a wallet — without revealing the details of what you know.</p>
+    <span class="label">Why it matters:</span>
+    <ul>
+      <li>Privacy: Hide wallet balances or identities while still proving legitimacy.</li>
+      <li>Scalability: Bundle thousands of transactions into one proof (zk-rollups).</li>
+      <li>Security: Verify off-chain computations like AI or financial data pipelines.</li>
+    </ul>
+    <span class="label">Main takeaway:</span>
+    <p>Recursive SNARKs can nest proofs, compressing massive data sets into a single, verifiable summary for truly scalable, private infrastructure.</p>
+  </div>
+
+  <div class="study">
+    <strong><u>Latency Arbitrage and the Hidden Economics of Speed</u></strong><br>
+    <span class="source">Source: Budish, Cramton & Shim (2015 + 2023 follow-ups)</span>
+    <span class="label">Summary:</span>
+    <p>High-frequency traders exploit milliseconds for profit, adding systemic inefficiency.</p>
+    <span class="label">Why it matters:</span>
+    <ul>
+      <li>Highlights the need for exchange reforms like IEX and MEV protection in DeFi.</li>
+    </ul>
+  </div>
+
+  <div class="study">
+    <strong><u>Rollups & Data Availability: Why Scaling Isn’t Just About Throughput</u></strong><br>
+    <span class="source">Source: Celestia & StarkWare blogs, 2024</span>
+    <span class="label">Summary:</span>
+    <p>Rollups bundle transactions, but without guaranteed data availability they risk censorship and unverified state.</p>
+    <span class="label">Why it matters:</span>
+    <ul>
+      <li>Data availability is core to modular security on Ethereum.</li>
+    </ul>
+  </div>
+
+  <div class="study">
+    <strong><u>Collateral Rehypothecation in DeFi Lending Markets</u></strong><br>
+    <span class="source">Source: Gauntlet Research, 2024</span>
+    <span class="label">Summary:</span>
+    <p>Explores how collateral is re-used across protocols and the systemic risk it introduces.</p>
+    <span class="label">Why it matters:</span>
+    <ul>
+      <li>Shows leverage chains form even without margin lending — critical for risk modeling.</li>
+    </ul>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
+
+</body>
 </html>
