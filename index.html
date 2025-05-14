@@ -117,6 +117,9 @@
 <body>
 
   <div class="toggle-container">
+  <span onclick="toggleDarkMode()" style="cursor: pointer;">☀️</span>
+  <span onclick="toggleDarkMode()" style="cursor: pointer;">🌙</span>
+</div>
     <span class="icon">☀️</span>
     <div class="toggle-switch" onclick="toggleDarkMode()" id="darkToggle"></div>
     <span class="icon">🌙</span>
@@ -173,6 +176,9 @@
   </div>
 
   <script>
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+}
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
       document.getElementById('darkToggle').classList.toggle('dark');
