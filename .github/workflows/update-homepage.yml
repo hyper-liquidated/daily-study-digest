@@ -1,0 +1,24 @@
+name: Auto Update Homepage
+
+on:
+  schedule:
+    - cron: '0 10 * * *'  # 5:00 AM EST daily
+  workflow_dispatch:
+
+jobs:
+  update-homepage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repo
+        uses: actions/checkout@v3
+
+      - name: Download updated index.html
+        run: curl -o index.html https://hyper-liquidated.github.io/daily-study-digest-source/index.html
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Update homepage"
+          git push
