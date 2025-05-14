@@ -15,10 +15,25 @@
       background-color: #fff;
       transition: background-color 0.3s, color 0.3s;
     }
-    .dark-mode {
-      background-color: #111;
-      color: #eee;
-    }
+  .dark-mode {
+  background-color: #111;
+  color: #eee;
+}
+
+/* Brighter “Source:” text */
+.dark-mode .source {
+  color: #ccc;        /* instead of #666 */
+}
+
+/* Brighter “Summary:”, “Why it matters:”, etc */
+.dark-mode .label {
+  color: #ddd;        /* instead of #444 */
+}
+
+/* Darker divider so it still shows up */
+.dark-mode hr {
+  border-top-color: #444;  /* instead of #ccc */
+}
     .toggle-btn {
       position: fixed;
       top: 1em;
