@@ -19,15 +19,9 @@
       background-color: #111;
       color: #eee;
     }
-    .dark-mode .source {
-      color: #ccc;
-    }
-    .dark-mode .label {
-      color: #ddd;
-    }
-    .dark-mode hr {
-      border-top-color: #444;
-    }
+    .dark-mode .source { color: #ccc; }
+    .dark-mode .label  { color: #ddd; }
+    .dark-mode hr      { border-top-color: #444; }
     .toggle-btn {
       position: fixed;
       top: 1em;
@@ -76,13 +70,15 @@
 </head>
 <body>
 
+  <!-- dark mode toggle -->
   <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
 
+  <!-- Track 1: The Social Layer -->
   <h1>The Social Layer</h1>
   <hr>
 
   <div class="study">
-    <strong><u>The Paradox of Choice Revisited</u></strong><br>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=The+Paradox+of+Choice+Revisited" target="_blank">The Paradox of Choice Revisited</a></u></strong><br>
     <span class="source">Source: Journal of Experimental Psychology: General, 2024</span>
     <span class="label">Summary:</span>
     <p>Revisits the famous 'jam experiment' and finds that fewer choices consistently result in faster decisions and greater satisfaction.</p>
@@ -91,7 +87,7 @@
   </div>
 
   <div class="study">
-    <strong><u>The Inheritance Lottery: How Family Wealth Shapes Risk-Taking and Innovation</u></strong><br>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=The+Inheritance+Lottery+How+Family+Wealth+Shapes+Risk-Taking+and+Innovation" target="_blank">The Inheritance Lottery: How Family Wealth Shapes Risk-Taking and Innovation</a></u></strong><br>
     <span class="source">Source: Quarterly Journal of Economics, 2024</span>
     <span class="label">Summary:</span>
     <p>Shows unexpected inheritances increase entrepreneurship — but only among top-wealth households.</p>
@@ -100,7 +96,7 @@
   </div>
 
   <div class="study">
-    <strong><u>How Cities Shape Mental Health: Noise, Density, and Access</u></strong><br>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=How+Cities+Shape+Mental+Health+Noise+Density+and+Access" target="_blank">How Cities Shape Mental Health: Noise, Density, and Access</a></u></strong><br>
     <span class="source">Source: Lancet Public Health, 2023</span>
     <span class="label">Summary:</span>
     <p>Green space and access to services reduce anxiety, while noise and isolation increase risk across dozens of cities.</p>
@@ -109,7 +105,7 @@
   </div>
 
   <div class="study">
-    <strong><u>The Scarcity Mindset Revisited: Cognitive Load or Learned Helplessness?</u></strong><br>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=The+Scarcity+Mindset+Revisited+Cognitive+Load+or+Learned+Helplessness" target="_blank">The Scarcity Mindset Revisited: Cognitive Load or Learned Helplessness?</a></u></strong><br>
     <span class="source">Source: Nature Human Behaviour, 2024</span>
     <span class="label">Summary:</span>
     <p>Proposes “learned helplessness” rather than “bandwidth tax” as the mechanism behind scarcity’s cognitive impacts.</p>
@@ -118,7 +114,7 @@
   </div>
 
   <div class="study">
-    <strong><u>Algorithmic Nudges for Civic Participation</u></strong><br>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=Algorithmic+Nudges+for+Civic+Participation" target="_blank">Algorithmic Nudges for Civic Participation</a></u></strong><br>
     <span class="source">Source: PNAS, 2023</span>
     <span class="label">Summary:</span>
     <p>Shows that simple reminder emails outperform social-media campaigns in boosting voter turnout and civic engagement.</p>
@@ -126,29 +122,26 @@
     <p>Applies behavioral insights to real-world democracy building.</p>
   </div>
 
+
+  <!-- Track 2: Architectures of Capital -->
   <h1>Architectures of Capital</h1>
   <hr>
 
   <div class="study">
-    <strong><u>What Is a Zero-Knowledge Proof (ZKP) and Why Should You Care?</u></strong><br>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=What+Is+a+Zero-Knowledge+Proof+and+Why+Should+You+Care" target="_blank">What Is a Zero-Knowledge Proof (ZKP) and Why Should You Care?</a></u></strong><br>
     <span class="source">Source: Ethereum Foundation blog series, 2024</span>
-
     <span class="label">Summary:</span>
     <p>A ZKP lets you prove you know something—say, a wallet password—without revealing the underlying details.</p>
-
     <span class="label">Example:</span>
     <p>Prove you’re over 18 without sharing your birthday: it checks “age &gt; 18” without exposing personal info.</p>
-
     <span class="label">Why it’s powerful in crypto:</span>
     <ul>
       <li><strong>Privacy:</strong> Hide balances or identities while still proving legitimacy.</li>
       <li><strong>Scalability:</strong> Bundle thousands of transactions into a single proof (zk-rollups) on Layer 1.</li>
-      <li><strong>Security:</strong> Verify off-chain compute (AI inference, financial pipelines) without trusting a third party.</li>
+      <li><strong>Security:</strong> Verify off-chain compute (AI inference, financial pipelines) without a trusted third party.</li>
     </ul>
-
     <span class="label">Main takeaway:</span>
-    <p>Recursive SNARKs nest proofs, compressing massive datasets into one verifiable summary—unlocking truly scalable, private blockchains.</p>
-
+    <p>Recursive SNARKs nest proofs, compressing massive datasets into one verifiable summary—unlocking truly scalable, privacy-preserving blockchains.</p>
     <span class="label">Projects using this:</span>
     <ul>
       <li>Zcash (privacy)</li>
@@ -158,21 +151,17 @@
   </div>
 
   <div class="study">
-    <strong><u>Latency Arbitrage and the Hidden Economics of Speed</u></strong><br>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=Latency+Arbitrage+and+the+Hidden+Economics+of+Speed" target="_blank">Latency Arbitrage and the Hidden Economics of Speed</a></u></strong><br>
     <span class="source">Source: Budish, Cramton & Shim (2015 + 2023 follow-ups)</span>
-
     <span class="label">Summary:</span>
     <p>High-frequency traders exploit millisecond speed edges for tiny profits, distorting price discovery and social welfare.</p>
-
     <span class="label">Why it’s powerful in crypto:</span>
     <ul>
       <li>Shows the need for built-in delays or batch auctions on exchanges.</li>
       <li>Drives MEV-protected DEX designs to curb extraction.</li>
     </ul>
-
     <span class="label">Main takeaway:</span>
     <p>Minimal protocol tweaks (speed bumps, batch slots) can end arms races over speed.</p>
-
     <span class="label">Projects using this:</span>
     <ul>
       <li>IEX (traditional finance)</li>
@@ -182,21 +171,17 @@
   </div>
 
   <div class="study">
-    <strong><u>Rollups &amp; Data Availability: Why Scaling Isn’t Just About Throughput</u></strong><br>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=Rollups+%26+Data+Availability+Why+Scaling+Isn%E2%80%99t+Just+About+Throughput" target="_blank">Rollups & Data Availability: Why Scaling Isn’t Just About Throughput</a></u></strong><br>
     <span class="source">Source: Celestia & StarkWare blogs, 2024</span>
-
     <span class="label">Summary:</span>
     <p>Rollups aggregate transactions to boost throughput, but without guaranteed on-chain data availability, users can’t independently verify state.</p>
-
     <span class="label">Why it’s powerful in crypto:</span>
     <ul>
       <li>Data availability is the bedrock of censorship-resistant rollups.</li>
       <li>Modular chains like Celestia decouple availability from execution for true scaling.</li>
     </ul>
-
     <span class="label">Main takeaway:</span>
     <p>Separating data availability from execution is key to building trust-minimized Layer 2 networks.</p>
-
     <span class="label">Projects using this:</span>
     <ul>
       <li>zkSync (rollup)</li>
@@ -206,21 +191,17 @@
   </div>
 
   <div class="study">
-    <strong><u>Collateral Rehypothecation in DeFi Lending Markets</u></strong><br>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=Collateral+Rehypothecation+in+DeFi+Lending+Markets" target="_blank">Collateral Rehypothecation in DeFi Lending Markets</a></u></strong><br>
     <span class="source">Source: Gauntlet Research, 2024</span>
-
     <span class="label">Summary:</span>
     <p>Analyzes how Aave and Compound reuse deposited collateral across protocols, creating hidden leverage chains.</p>
-
     <span class="label">Why it’s powerful in crypto:</span>
     <ul>
       <li>Amplifies liquidity but risks cascading insolvencies.</li>
       <li>Essential for accurate systemic risk modeling in DeFi.</li>
     </ul>
-
     <span class="label">Main takeaway:</span>
     <p>DeFi dashboards must surface rehypothecation paths to prevent contagion events.</p>
-
     <span class="label">Projects using this:</span>
     <ul>
       <li>Gauntlet risk sims</li>
@@ -229,21 +210,17 @@
   </div>
 
   <div class="study">
-    <strong><u>Stablecoin Peg Risk: When “1 : 1” Isn’t Enough</u></strong><br>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=Stablecoin+Peg+Risk+When+%221+%3A+1%22+Isn%E2%80%99t+Enough" target="_blank">Stablecoin Peg Risk: When “1 : 1” Isn’t Enough</a></u></strong><br>
     <span class="source">Source: Chicago Booth Working Paper, 2023</span>
-
     <span class="label">Summary:</span>
     <p>Even fully collateralized stablecoins can break peg due to run-dynamics, liquidity spirals, and price-path dependencies.</p>
-
     <span class="label">Why it’s powerful in crypto:</span>
     <ul>
       <li>Reveals that collateral alone doesn’t guarantee stability under stress.</li>
       <li>Guides designs for diversification, circuit breakers, and dynamic reserves.</li>
     </ul>
-
     <span class="label">Main takeaway:</span>
     <p>Stablecoin protocols should incorporate adaptive collateral management and withdrawal limits to maintain peg integrity.</p>
-
     <span class="label">Projects using this:</span>
     <ul>
       <li>Curve DAO (liquidity pools)</li>
