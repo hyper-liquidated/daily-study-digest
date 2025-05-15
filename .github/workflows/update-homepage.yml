@@ -1,11 +1,11 @@
 name: Auto Update Daily Study Feed
 
 permissions:
-  contents: write
+  contents: write          # ← enables git push
 
 on:
   schedule:
-    - cron: '0 9 * * *'          # 09 UTC = 5 AM ET
+    - cron: '0 9 * * *'
   workflow_dispatch:
 
 jobs:
