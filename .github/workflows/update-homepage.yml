@@ -41,12 +41,18 @@ jobs:
           cd pages
           python scripts/generate_feed.py
 
-      # 5) Commit & publish if anything changed
-      - name: Commit & push
+            # 5) Commit & push if changed
+      - name: Commit & publish
         run: |
           cd pages
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add data/studies.json index.html daily_study_digest.xml
           git diff --cached --quiet || git commit -m "Auto-regenerate homepage"
-          git push origin main
+
+          # --- inject the GITHUB_TOKEN for this repo into the remote URL ---
+          git remote set-url origin \
+            https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git push origin main   # now authenticated
+
