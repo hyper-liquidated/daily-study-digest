@@ -15,25 +15,19 @@
       background-color: #fff;
       transition: background-color 0.3s, color 0.3s;
     }
-  .dark-mode {
-  background-color: #111;
-  color: #eee;
-}
-
-/* Brighter “Source:” text */
-.dark-mode .source {
-  color: #ccc;        /* instead of #666 */
-}
-
-/* Brighter “Summary:”, “Why it matters:”, etc */
-.dark-mode .label {
-  color: #ddd;        /* instead of #444 */
-}
-
-/* Darker divider so it still shows up */
-.dark-mode hr {
-  border-top-color: #444;  /* instead of #ccc */
-}
+    .dark-mode {
+      background-color: #111;
+      color: #eee;
+    }
+    .dark-mode .source {
+      color: #ccc;      /* brighter metadata on dark */
+    }
+    .dark-mode .label {
+      color: #ddd;      /* brighter labels on dark */
+    }
+    .dark-mode hr {
+      border-top-color: #444;  /* darker divider on dark */
+    }
     .toggle-btn {
       position: fixed;
       top: 1em;
@@ -68,14 +62,12 @@
       margin: 0.2em 0 0.8em 0;
     }
     ul {
-      margin-top: 0.2em;
-      margin-bottom: 0.8em;
-      padding-left: 1.2em;
+      margin: 0.2em 0 0.8em 1.2em;
     }
     hr {
       border: none;
       border-top: 1px solid #ccc;
-      margin: 0.5em 0 1em 0;
+      margin: 0.5em 0 1em;
     }
     @media (max-width: 600px) {
       body { font-size: 1.05em; }
@@ -84,6 +76,7 @@
 </head>
 <body>
 
+  <!-- single working toggle -->
   <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
 
   <h1>The Social Layer</h1>
@@ -111,42 +104,45 @@
     <strong><u>How Cities Shape Mental Health: Noise, Density, and Access</u></strong><br>
     <span class="source">Source: Lancet Public Health, 2023</span>
     <span class="label">Summary:</span>
-    <p>Analyzes mental health outcomes across 30+ cities. Green space and access to services reduce anxiety, while noise and isolation increase risk.</p>
+    <p>Green space and access to services reduce anxiety, while noise and isolation increase risk across 30+ cities.</p>
     <span class="label">Why it’s notable:</span>
-    <p>Links urban policy and mental health — with strong implications for zoning, noise control, and walkability.</p>
+    <p>Evidence for how urban design influences mental health and community well-being.</p>
   </div>
 
   <div class="study">
     <strong><u>The Scarcity Mindset Revisited: Cognitive Load or Learned Helplessness?</u></strong><br>
     <span class="source">Source: Nature Human Behaviour, 2024</span>
     <span class="label">Summary:</span>
-    <p>Re-examines the effect of financial scarcity on decision-making, suggesting a learned helplessness framework over bandwidth tax.</p>
+    <p>Proposes “learned helplessness” rather than “bandwidth tax” as the mechanism behind scarcity’s cognitive impacts.</p>
     <span class="label">Why it’s notable:</span>
-    <p>Challenges a popular behavioral theory with new empirical evidence.</p>
+    <p>Challenges a popular behavioral model with new empirical evidence.</p>
   </div>
 
   <div class="study">
     <strong><u>Algorithmic Nudges for Civic Participation</u></strong><br>
     <span class="source">Source: PNAS, 2023</span>
     <span class="label">Summary:</span>
-    <p>Shows that simple email nudges increase voter turnout and civic activity more effectively than social media campaigns.</p>
+    <p>Shows that simple reminder emails outperform social-media campaigns in boosting voter turnout and civic engagement.</p>
     <span class="label">Why it’s notable:</span>
-    <p>Applies behavioral nudging to real-world democracy-building with strong statistical backing.</p>
+    <p>Applies behavioral insights to real-world democracy building.</p>
   </div>
 
   <h1>Architectures of Capital</h1>
   <hr>
 
+  <!-- Track 2, “Summary” format -->
   <div class="study">
     <strong><u>What Is a Zero-Knowledge Proof (ZKP) and Why Should You Care?</u></strong><br>
     <span class="source">Source: Ethereum Foundation blog series, 2024</span>
-    <span class="label">Summary (Plain-English):</span>
+    <span class="label">Summary:</span>
     <p>A ZKP lets you prove you know something — for example, the password to a wallet — without revealing the details of what you know.</p>
+    <span class="label">Example:</span>
+    <p>Prove you’re over 18 without sharing your birthday; it verifies the claim age > 18 without exposing data.</p>
     <span class="label">Why it matters:</span>
     <ul>
-      <li>Privacy: Hide wallet balances or identities while still proving legitimacy.</li>
+      <li>Privacy: Hide balances or identities while still proving legitimacy.</li>
       <li>Scalability: Bundle thousands of transactions into one proof (zk-rollups).</li>
-      <li>Security: Verify off-chain computations like AI or financial data pipelines.</li>
+      <li>Security: Verify off-chain computations like AI inference or financial pipelines.</li>
     </ul>
     <span class="label">Main takeaway:</span>
     <p>Recursive SNARKs can nest proofs, compressing massive data sets into a single, verifiable summary for truly scalable, private infrastructure.</p>
@@ -161,28 +157,34 @@
     <ul>
       <li>Highlights the need for exchange reforms like IEX and MEV protection in DeFi.</li>
     </ul>
+    <span class="label">Main takeaway:</span>
+    <p>Simple protocol tweaks (batch auctions, enforced delays) can vastly reduce arms races over speed.</p>
   </div>
 
   <div class="study">
     <strong><u>Rollups & Data Availability: Why Scaling Isn’t Just About Throughput</u></strong><br>
     <span class="source">Source: Celestia & StarkWare blogs, 2024</span>
     <span class="label">Summary:</span>
-    <p>Rollups bundle transactions, but without guaranteed data availability they risk censorship and unverified state.</p>
+    <p>Rollups bundle transactions but without guaranteed data availability they risk censorship and unverified state.</p>
     <span class="label">Why it matters:</span>
     <ul>
-      <li>Data availability is core to modular security on Ethereum.</li>
+      <li>Data availability is core to modular security on Ethereum and other blockchains.</li>
     </ul>
+    <span class="label">Main takeaway:</span>
+    <p>Separating data availability from execution (Celestia, EigenDA) is the key to truly scalable rollups.</p>
   </div>
 
   <div class="study">
     <strong><u>Collateral Rehypothecation in DeFi Lending Markets</u></strong><br>
     <span class="source">Source: Gauntlet Research, 2024</span>
     <span class="label">Summary:</span>
-    <p>Explores how collateral is re-used across protocols and the systemic risk it introduces.</p>
+    <p>Explores how collateral is re-used across protocols (Aave, Compound) and the systemic risk it creates in a liquidity crunch.</p>
     <span class="label">Why it matters:</span>
     <ul>
-      <li>Shows leverage chains form even without margin lending — critical for risk modeling.</li>
+      <li>Shows how leverage chains form without margin lending — critical for accurate risk modeling.</li>
     </ul>
+    <span class="label">Main takeaway:</span>
+    <p>DeFi protocols must track rehypothecation pathways or face cascading insolvency risks.</p>
   </div>
 
   <script>
