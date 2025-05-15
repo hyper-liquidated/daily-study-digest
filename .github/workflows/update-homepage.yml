@@ -1,37 +1,42 @@
-name: Auto Update Homepage
-
-permissions:
-  contents: write
-
+name: Auto Update Daily Study Feed
 on:
   schedule:
-    - cron: '0 10 * * *'
+    # 09:00 UTC = 5 AM ET
+    - cron: '0 9 * * *'
   workflow_dispatch:
 
 jobs:
-  update-homepage:
+  update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      # A) Checkout this Pages repo
+      - uses: actions/checkout@v3
         with:
-          persist-credentials: true
+          path: pages
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      # B) Checkout your source repo
+      - uses: actions/checkout@v3
         with:
-          python-version: '3.x'
+          repository: hyper-liquidated/study-source
+          path: source
 
-      - name: Install dependencies
-        run: pip install -r scripts/requirements.txt
-
-      - name: Generate index.html
-        run: python scripts/generate_feed.py
-
-      - name: Commit & push if changed
+      # C) Copy fresh JSON
+      - name: Copy new studies.json
         run: |
+          cp source/data/studies.json pages/data/studies.json
+
+      # D) Build HTML & RSS
+      - name: Build feed & page
+        run: |
+          cd pages
+          python scripts/generate_feed.py
+
+      # E) Commit & push
+      - name: Commit & publish
+        run: |
+          cd pages
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add index.html
-          git diff --quiet --cached || git commit -m "Auto-regenerate homepage"
-          git push
+          git add data/studies.json index.html daily_study_digest.xml
+          git diff --cached --quiet || git commit -m "Auto-regenerate homepage"
+          git push origin main
