@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Check out this repo (keeps history so the diff works)
+      # 1) Check out this repo
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
@@ -21,8 +21,9 @@ jobs:
 
       # 2) Grab the latest RSS file
       - name: Download latest RSS feed
-        run: curl -fsSL -o daily_study_digest.xml \
-             https://hyper-liquidated.github.io/daily-study-digest-source/rss.xml
+        run: |
+          curl -fsSL -o daily_study_digest.xml \
+            https://hyper-liquidated.github.io/daily-study-digest-source/rss.xml
 
       # 3) Commit & push only when the file changed
       - name: Commit and push if changed
