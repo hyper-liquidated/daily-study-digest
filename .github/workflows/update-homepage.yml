@@ -12,19 +12,23 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      # 1) Checkout THIS Pages repo into folder “pages”
-      - name: Checkout pages repo
-        uses: actions/checkout@v3
-        with:
-          path: pages
+    # 1) Checkout THIS pages repo – do NOT persist its token
+- name: Checkout pages repo
+  uses: actions/checkout@v3
+  with:
+    path: pages
+    persist-credentials: false      # prevents 403 later
 
-      # 2) Checkout the SOURCE repo (study-source) into folder “source”
-      - name: Checkout study-source repo
-        uses: actions/checkout@v3            # ← same action
-        with:
-          repository: hyper-liquidated/study-source   # owner/repo of Repo A
-          token: ${{ secrets.SOURCE_PAT }}             # PAT you just added
-          path: source
+# 2) Checkout the SOURCE repo
+#    • If source repo is public → leave token blank
+#    • If private → use    token: ${{ secrets.SOURCE_PAT }}
+- name: Checkout study-source repo
+  uses: actions/checkout@v3
+  with:
+    repository: hyper-liquidated/study-source   # owner/repo of Repo A
+    token: ""                                   # "" for public repo
+    path: source
+
 
       # 3) Copy the fresh JSON into pages/data
       - name: Copy studies.json
