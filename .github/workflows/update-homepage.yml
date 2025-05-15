@@ -42,7 +42,7 @@ jobs:
           python scripts/generate_feed.py
 
                   # 5) Commit & push if changed
-      - name: Commit & publish
+         - name: Commit & publish
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO:  ${{ github.repository }}
@@ -53,13 +53,16 @@ jobs:
 
           git add data/studies.json index.html daily_study_digest.xml
 
-          # commit only if there are staged changes
           if ! git diff --cached --quiet; then
             git commit -m "Auto-regenerate homepage"
 
-            # push with token embedded in the URL
-            git push "https://x-access-token:${TOKEN}@github.com/${REPO}.git" HEAD:main
+            # 👉 add / update the remote so Git always pushes with the token
+            git remote set-url origin \
+              https://x-access-token:${TOKEN}@github.com/${REPO}.git
+
+            git push origin HEAD:main
           else
             echo "No changes – nothing to push."
           fi
+
 
