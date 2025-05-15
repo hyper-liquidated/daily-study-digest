@@ -1,19 +1,17 @@
-# .github/workflows/update-homepage.yml
 name: Auto Update Homepage
 
-# 1) Give the workflow explicit write access to `contents`
 permissions:
-  contents: write
+  contents: write   # let the GITHUB_TOKEN push back to main
 
 on:
-  workflow_dispatch:  # only when you click “Run workflow” by hand
+  schedule:
+    - cron: '0 10 * * *'   # daily at 5 AM Eastern
+  workflow_dispatch:
 
 jobs:
   update-homepage:
     runs-on: ubuntu-latest
-
     steps:
-      # 2) Checkout and persist the GITHUB_TOKEN credentials
       - name: Checkout code
         uses: actions/checkout@v3
         with:
@@ -35,6 +33,5 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add index.html
-          git diff --cached --quiet \
-            || git commit -m "Rebuild homepage with DOI links"
+          git diff --quiet --cached || git commit -m "Auto-regenerate homepage"
           git push
