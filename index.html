@@ -2,121 +2,239 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Daily Study Digest</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Social Layer + Architectures of Capital</title>
   <style>
-    :root {
-      --bg: #fff; --fg: #111;
-      --link: #0066cc; --divider: #ccc;
-    }
-    body.dark-mode {
-      --bg: #121212; --fg: #e0e0e0;
-      --link: #88c0d0; --divider: #444;
-    }
     body {
-      margin: 0; padding: 2rem;
       font-family: sans-serif;
-      background-color: var(--bg);
-      color: var(--fg);
-      line-height: 1.5;
+      max-width: 720px;
+      margin: auto;
+      padding: 2em;
+      line-height: 1.6;
+      color: #222;
+      background-color: #fff;
+      transition: background-color 0.3s, color 0.3s;
     }
+    .dark-mode {
+      background-color: #111;
+      color: #eee;
+    }
+    .dark-mode .source { color: #ccc; }
+    .dark-mode .label  { color: #ddd; }
+    .dark-mode hr      { border-top-color: #444; }
     .toggle-btn {
-      position: fixed; top: 1rem; right: 1rem;
-      background: none; border: none;
-      font-size: 1.5rem; cursor: pointer;
-      color: var(--fg);
+      position: fixed;
+      top: 1em;
+      right: 1em;
+      background: none;
+      border: none;
+      font-size: 1.5em;
+      cursor: pointer;
+      z-index: 1000;
     }
-    a { color: var(--link); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    h1 { margin-top: 4rem; border-bottom: 1px solid var(--divider); padding-bottom: .3rem; }
-    .study { margin-bottom: 2rem; }
-    .study h2 {
-      margin: .5rem 0 .2rem;
-      font-size: 1.2rem;
-      text-decoration: underline;
+    h1 {
+      font-size: 1.8em;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.3em;
+      margin-top: 2em;
     }
-    .source { font-size: .9rem; color: gray; margin-bottom: .5rem; display: block; }
-    .label { font-weight: bold; margin-top: .5rem; display: block; }
-    hr { border: 0; border-top: 1px solid var(--divider); margin: 2rem 0; }
+    .study {
+      margin-bottom: 2em;
+    }
+    .source {
+      font-size: 0.9em;
+      color: #666;
+    }
+    .label {
+      display: block;
+      font-weight: bold;
+      margin-top: 0.6em;
+      margin-bottom: 0.2em;
+      color: #444;
+    }
+    p {
+      margin: 0.2em 0 0.8em 0;
+    }
+    ul {
+      margin: 0.2em 0 0.8em 1.2em;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 0.5em 0 1em;
+    }
+    @media (max-width: 600px) {
+      body { font-size: 1.05em; }
+    }
   </style>
 </head>
 <body>
-  <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
-  <p><a href="archive.html">📚 View Past Daily Studies</a></p>
 
+  <!-- dark mode toggle -->
+  <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
+
+<p><a href="archive.html">📚 View Past Daily Studies</a></p>
+
+  <!-- Track 1: The Social Layer -->
   <h1>The Social Layer</h1>
+  <hr>
+
   <div class="study">
-    <h2>The Paradox of Choice Revisited</h2>
-    <span class="source">Journal of Experimental Psychology: General, 2024</span>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=The+Paradox+of+Choice+Revisited" target="_blank">The Paradox of Choice Revisited</a></u></strong><br>
+    <span class="source">Source: Journal of Experimental Psychology: General, 2024</span>
     <span class="label">Summary:</span>
-    <p>Revisits the famous “jam experiment” and finds that fewer choices consistently result in faster decisions and greater satisfaction.</p>
+    <p>Revisits the famous 'jam experiment' and finds that fewer choices consistently result in faster decisions and greater satisfaction.</p>
+    <span class="label">Why it’s notable:</span>
+    <p>Strong real-world implications for marketing, UI design, and productivity systems.</p>
   </div>
+
   <div class="study">
-    <h2>The Inheritance Lottery: How Family Wealth Shapes Risk-Taking and Innovation</h2>
-    <span class="source">Quarterly Journal of Economics, 2024</span>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=The+Inheritance+Lottery+How+Family+Wealth+Shapes+Risk-Taking+and+Innovation" target="_blank">The Inheritance Lottery: How Family Wealth Shapes Risk-Taking and Innovation</a></u></strong><br>
+    <span class="source">Source: Quarterly Journal of Economics, 2024</span>
     <span class="label">Summary:</span>
     <p>Shows unexpected inheritances increase entrepreneurship — but only among top-wealth households.</p>
-  </div>
-  <div class="study">
-    <h2>How Cities Shape Mental Health: Noise, Density, and Access</h2>
-    <span class="source">Lancet Public Health, 2023</span>
-    <span class="label">Summary:</span>
-    <p>Green space and access to services reduce anxiety, while noise and isolation increase risk across dozens of cities.</p>
-  </div>
-  <div class="study">
-    <h2>The Scarcity Mindset Revisited: Cognitive Load or Learned Helplessness?</h2>
-    <span class="source">Nature Human Behaviour, 2024</span>
-    <span class="label">Summary:</span>
-    <p>Proposes “learned helplessness” rather than “bandwidth tax” as the mechanism behind scarcity’s cognitive impacts.</p>
-  </div>
-  <div class="study">
-    <h2>Algorithmic Nudges for Civic Participation</h2>
-    <span class="source">PNAS, 2023</span>
-    <span class="label">Summary:</span>
-    <p>Shows that simple reminder emails outperform social-media campaigns in boosting voter turnout and civic engagement.</p>
+    <span class="label">Why it’s notable:</span>
+    <p>Fresh look at wealth inequality’s influence on ambition and innovation.</p>
   </div>
 
-  <h1>Architectures of Capital</h1>
   <div class="study">
-    <h2>What Is a Zero-Knowledge Proof (ZKP) and Why Should You Care?</h2>
-    <span class="source">Ethereum Foundation blog series, 2024</span>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=How+Cities+Shape+Mental+Health+Noise+Density+and+Access" target="_blank">How Cities Shape Mental Health: Noise, Density, and Access</a></u></strong><br>
+    <span class="source">Source: Lancet Public Health, 2023</span>
+    <span class="label">Summary:</span>
+    <p>Green space and access to services reduce anxiety, while noise and isolation increase risk across dozens of cities.</p>
+    <span class="label">Why it’s notable:</span>
+    <p>Evidence for how urban design influences mental health and community wellbeing.</p>
+  </div>
+
+  <div class="study">
+    <strong><u><a href="https://www.semanticscholar.org/search?q=The+Scarcity+Mindset+Revisited+Cognitive+Load+or+Learned+Helplessness" target="_blank">The Scarcity Mindset Revisited: Cognitive Load or Learned Helplessness?</a></u></strong><br>
+    <span class="source">Source: Nature Human Behaviour, 2024</span>
+    <span class="label">Summary:</span>
+    <p>Proposes “learned helplessness” rather than “bandwidth tax” as the mechanism behind scarcity’s cognitive impacts.</p>
+    <span class="label">Why it’s notable:</span>
+    <p>Challenges a popular behavioral model with new empirical evidence.</p>
+  </div>
+
+  <div class="study">
+    <strong><u><a href="https://www.semanticscholar.org/search?q=Algorithmic+Nudges+for+Civic+Participation" target="_blank">Algorithmic Nudges for Civic Participation</a></u></strong><br>
+    <span class="source">Source: PNAS, 2023</span>
+    <span class="label">Summary:</span>
+    <p>Shows that simple reminder emails outperform social-media campaigns in boosting voter turnout and civic engagement.</p>
+    <span class="label">Why it’s notable:</span>
+    <p>Applies behavioral insights to real-world democracy building.</p>
+  </div>
+
+
+  <!-- Track 2: Architectures of Capital -->
+  <h1>Architectures of Capital</h1>
+  <hr>
+
+  <div class="study">
+    <strong><u><a href="https://www.semanticscholar.org/search?q=What+Is+a+Zero-Knowledge+Proof+and+Why+Should+You+Care" target="_blank">What Is a Zero-Knowledge Proof (ZKP) and Why Should You Care?</a></u></strong><br>
+    <span class="source">Source: Ethereum Foundation blog series, 2024</span>
     <span class="label">Summary:</span>
     <p>A ZKP lets you prove you know something—say, a wallet password—without revealing the underlying details.</p>
+    <span class="label">Example:</span>
+    <p>Prove you’re over 18 without sharing your birthday: it checks “age &gt; 18” without exposing personal info.</p>
+    <span class="label">Why it’s powerful in crypto:</span>
+    <ul>
+      <li><strong>Privacy:</strong> Hide balances or identities while still proving legitimacy.</li>
+      <li><strong>Scalability:</strong> Bundle thousands of transactions into a single proof (zk-rollups) on Layer 1.</li>
+      <li><strong>Security:</strong> Verify off-chain compute (AI inference, financial pipelines) without a trusted third party.</li>
+    </ul>
+    <span class="label">Main takeaway:</span>
+    <p>Recursive SNARKs nest proofs, compressing massive datasets into one verifiable summary—unlocking truly scalable, privacy-preserving blockchains.</p>
+    <span class="label">Projects using this:</span>
+    <ul>
+      <li>Zcash (privacy)</li>
+      <li>Polygon zkEVM (Ethereum scaling)</li>
+      <li>Mina Protocol (constant-size state)</li>
+    </ul>
   </div>
+
   <div class="study">
-    <h2>Latency Arbitrage and the Hidden Economics of Speed</h2>
-    <span class="source">Budish, Cramton & Shim (2015 + 2023 follow-ups)</span>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=Latency+Arbitrage+and+the+Hidden+Economics+of+Speed" target="_blank">Latency Arbitrage and the Hidden Economics of Speed</a></u></strong><br>
+    <span class="source">Source: Budish, Cramton & Shim (2015 + 2023 follow-ups)</span>
     <span class="label">Summary:</span>
     <p>High-frequency traders exploit millisecond speed edges for tiny profits, distorting price discovery and social welfare.</p>
+    <span class="label">Why it’s powerful in crypto:</span>
+    <ul>
+      <li>Shows the need for built-in delays or batch auctions on exchanges.</li>
+      <li>Drives MEV-protected DEX designs to curb extraction.</li>
+    </ul>
+    <span class="label">Main takeaway:</span>
+    <p>Minimal protocol tweaks (speed bumps, batch slots) can end arms races over speed.</p>
+    <span class="label">Projects using this:</span>
+    <ul>
+      <li>IEX (traditional finance)</li>
+      <li>Flashbots (Ethereum MEV)</li>
+      <li>CowSwap (batch auctions)</li>
+    </ul>
   </div>
+
   <div class="study">
-    <h2>Rollups & Data Availability: Why Scaling Isn’t Just About Throughput</h2>
-    <span class="source">Celestia & StarkWare blogs, 2024</span>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=Rollups+%26+Data+Availability+Why+Scaling+Isn%E2%80%99t+Just+About+Throughput" target="_blank">Rollups & Data Availability: Why Scaling Isn’t Just About Throughput</a></u></strong><br>
+    <span class="source">Source: Celestia & StarkWare blogs, 2024</span>
     <span class="label">Summary:</span>
     <p>Rollups aggregate transactions to boost throughput, but without guaranteed on-chain data availability, users can’t independently verify state.</p>
+    <span class="label">Why it’s powerful in crypto:</span>
+    <ul>
+      <li>Data availability is the bedrock of censorship-resistant rollups.</li>
+      <li>Modular chains like Celestia decouple availability from execution for true scaling.</li>
+    </ul>
+    <span class="label">Main takeaway:</span>
+    <p>Separating data availability from execution is key to building trust-minimized Layer 2 networks.</p>
+    <span class="label">Projects using this:</span>
+    <ul>
+      <li>zkSync (rollup)</li>
+      <li>Celestia (DA layer)</li>
+      <li>EigenDA (dedicated DA network)</li>
+    </ul>
   </div>
+
   <div class="study">
-    <h2>Collateral Rehypothecation in DeFi Lending Markets</h2>
-    <span class="source">Gauntlet Research, 2024</span>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=Collateral+Rehypothecation+in+DeFi+Lending+Markets" target="_blank">Collateral Rehypothecation in DeFi Lending Markets</a></u></strong><br>
+    <span class="source">Source: Gauntlet Research, 2024</span>
     <span class="label">Summary:</span>
     <p>Analyzes how Aave and Compound reuse deposited collateral across protocols, creating hidden leverage chains.</p>
+    <span class="label">Why it’s powerful in crypto:</span>
+    <ul>
+      <li>Amplifies liquidity but risks cascading insolvencies.</li>
+      <li>Essential for accurate systemic risk modeling in DeFi.</li>
+    </ul>
+    <span class="label">Main takeaway:</span>
+    <p>DeFi dashboards must surface rehypothecation paths to prevent contagion events.</p>
+    <span class="label">Projects using this:</span>
+    <ul>
+      <li>Gauntlet risk sims</li>
+      <li>Chaos Labs stress tests</li>
+    </ul>
   </div>
+
   <div class="study">
-    <h2>Stablecoin Peg Risk: When “1 : 1” Isn’t Enough</h2>
-    <span class="source">Chicago Booth Working Paper, 2023</span>
+    <strong><u><a href="https://www.semanticscholar.org/search?q=Stablecoin+Peg+Risk+When+%221+%3A+1%22+Isn%E2%80%99t+Enough" target="_blank">Stablecoin Peg Risk: When “1 : 1” Isn’t Enough</a></u></strong><br>
+    <span class="source">Source: Chicago Booth Working Paper, 2023</span>
     <span class="label">Summary:</span>
     <p>Even fully collateralized stablecoins can break peg due to run-dynamics, liquidity spirals, and price-path dependencies.</p>
+    <span class="label">Why it’s powerful in crypto:</span>
+    <ul>
+      <li>Reveals that collateral alone doesn’t guarantee stability under stress.</li>
+      <li>Guides designs for diversification, circuit breakers, and dynamic reserves.</li>
+    </ul>
+    <span class="label">Main takeaway:</span>
+    <p>Stablecoin protocols should incorporate adaptive collateral management and withdrawal limits to maintain peg integrity.</p>
+    <span class="label">Projects using this:</span>
+    <ul>
+      <li>Curve DAO (liquidity pools)</li>
+      <li>MIP-65 (MakerDAI risk parameters)</li>
+    </ul>
   </div>
 
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
-      localStorage.theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-    }
-    // remember preference
-    if (localStorage.theme === 'dark') {
-      document.body.classList.add('dark-mode');
     }
   </script>
+
 </body>
 </html>
