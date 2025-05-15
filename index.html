@@ -1,26 +1,122 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>The Social Layer + Architectures of Capital</title>
+  <title>Daily Study Digest</title>
   <style>
-    /* your CSS (same as before) */
+    :root {
+      --bg: #fff; --fg: #111;
+      --link: #0066cc; --divider: #ccc;
+    }
+    body.dark-mode {
+      --bg: #121212; --fg: #e0e0e0;
+      --link: #88c0d0; --divider: #444;
+    }
+    body {
+      margin: 0; padding: 2rem;
+      font-family: sans-serif;
+      background-color: var(--bg);
+      color: var(--fg);
+      line-height: 1.5;
+    }
+    .toggle-btn {
+      position: fixed; top: 1rem; right: 1rem;
+      background: none; border: none;
+      font-size: 1.5rem; cursor: pointer;
+      color: var(--fg);
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1 { margin-top: 4rem; border-bottom: 1px solid var(--divider); padding-bottom: .3rem; }
+    .study { margin-bottom: 2rem; }
+    .study h2 {
+      margin: .5rem 0 .2rem;
+      font-size: 1.2rem;
+      text-decoration: underline;
+    }
+    .source { font-size: .9rem; color: gray; margin-bottom: .5rem; display: block; }
+    .label { font-weight: bold; margin-top: .5rem; display: block; }
+    hr { border: 0; border-top: 1px solid var(--divider); margin: 2rem 0; }
   </style>
-</head><body>
+</head>
+<body>
   <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
   <p><a href="archive.html">📚 View Past Daily Studies</a></p>
-  <h1>The Social Layer</h1><hr>
 
+  <h1>The Social Layer</h1>
   <div class="study">
-    <strong><u><a href="https://doi.org/10.2307/4343562" target="_blank">The Paradox of Choice Revisited</a></u></strong><br>
-    <span class="source">Source: Journal of Experimental Psychology: General, 2024</span>
+    <h2>The Paradox of Choice Revisited</h2>
+    <span class="source">Journal of Experimental Psychology: General, 2024</span>
     <span class="label">Summary:</span>
-    <p>Revisits the famous 'jam experiment' and finds that fewer choices consistently result in faster decisions and greater satisfaction.</p>
+    <p>Revisits the famous “jam experiment” and finds that fewer choices consistently result in faster decisions and greater satisfaction.</p>
   </div>
-  <h1>Architectures of Capital</h1><hr>
+  <div class="study">
+    <h2>The Inheritance Lottery: How Family Wealth Shapes Risk-Taking and Innovation</h2>
+    <span class="source">Quarterly Journal of Economics, 2024</span>
+    <span class="label">Summary:</span>
+    <p>Shows unexpected inheritances increase entrepreneurship — but only among top-wealth households.</p>
+  </div>
+  <div class="study">
+    <h2>How Cities Shape Mental Health: Noise, Density, and Access</h2>
+    <span class="source">Lancet Public Health, 2023</span>
+    <span class="label">Summary:</span>
+    <p>Green space and access to services reduce anxiety, while noise and isolation increase risk across dozens of cities.</p>
+  </div>
+  <div class="study">
+    <h2>The Scarcity Mindset Revisited: Cognitive Load or Learned Helplessness?</h2>
+    <span class="source">Nature Human Behaviour, 2024</span>
+    <span class="label">Summary:</span>
+    <p>Proposes “learned helplessness” rather than “bandwidth tax” as the mechanism behind scarcity’s cognitive impacts.</p>
+  </div>
+  <div class="study">
+    <h2>Algorithmic Nudges for Civic Participation</h2>
+    <span class="source">PNAS, 2023</span>
+    <span class="label">Summary:</span>
+    <p>Shows that simple reminder emails outperform social-media campaigns in boosting voter turnout and civic engagement.</p>
+  </div>
+
+  <h1>Architectures of Capital</h1>
+  <div class="study">
+    <h2>What Is a Zero-Knowledge Proof (ZKP) and Why Should You Care?</h2>
+    <span class="source">Ethereum Foundation blog series, 2024</span>
+    <span class="label">Summary:</span>
+    <p>A ZKP lets you prove you know something—say, a wallet password—without revealing the underlying details.</p>
+  </div>
+  <div class="study">
+    <h2>Latency Arbitrage and the Hidden Economics of Speed</h2>
+    <span class="source">Budish, Cramton & Shim (2015 + 2023 follow-ups)</span>
+    <span class="label">Summary:</span>
+    <p>High-frequency traders exploit millisecond speed edges for tiny profits, distorting price discovery and social welfare.</p>
+  </div>
+  <div class="study">
+    <h2>Rollups & Data Availability: Why Scaling Isn’t Just About Throughput</h2>
+    <span class="source">Celestia & StarkWare blogs, 2024</span>
+    <span class="label">Summary:</span>
+    <p>Rollups aggregate transactions to boost throughput, but without guaranteed on-chain data availability, users can’t independently verify state.</p>
+  </div>
+  <div class="study">
+    <h2>Collateral Rehypothecation in DeFi Lending Markets</h2>
+    <span class="source">Gauntlet Research, 2024</span>
+    <span class="label">Summary:</span>
+    <p>Analyzes how Aave and Compound reuse deposited collateral across protocols, creating hidden leverage chains.</p>
+  </div>
+  <div class="study">
+    <h2>Stablecoin Peg Risk: When “1 : 1” Isn’t Enough</h2>
+    <span class="source">Chicago Booth Working Paper, 2023</span>
+    <span class="label">Summary:</span>
+    <p>Even fully collateralized stablecoins can break peg due to run-dynamics, liquidity spirals, and price-path dependencies.</p>
+  </div>
+
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
+      localStorage.theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    }
+    // remember preference
+    if (localStorage.theme === 'dark') {
+      document.body.classList.add('dark-mode');
     }
   </script>
-</body></html>
+</body>
+</html>
