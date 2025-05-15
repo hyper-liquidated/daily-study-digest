@@ -4,7 +4,7 @@ from pathlib import Path
 
 # ─── Your 10 studies ────────────────────────────────────────────────────────────
 STUDIES = [
-    # ── Track 1 ── add a "notable" field for each
+    # Track 1
     {
         "title": "The Paradox of Choice Revisited",
         "source": "Journal of Experimental Psychology: General, 2024",
@@ -36,7 +36,7 @@ STUDIES = [
         "notable": "Directly informs government outreach strategies and platform design.",
     },
 
-    # ── Track 2 ── each gets 5 fields
+    # Track 2
     {
         "title": "What Is a Zero-Knowledge Proof (ZKP) and Why Should You Care?",
         "source": "Ethereum Foundation blog series, 2024",
@@ -46,13 +46,13 @@ STUDIES = [
         "explanation": "Recursive SNARKs stack proofs into one, compressing thousands of computations into a single verifiable proof.",
         "projects": [
             "Zcash (privacy)",
-            "Polygon zkEVM (Ethereum scaling)",
-            "Mina Protocol (constant‐size blockchain state)",
+            "Polygon zkEVM (scaling Ethereum)",
+            "Mina Protocol (constant-size blockchain state)",
         ],
     },
     {
         "title": "Latency Arbitrage and the Hidden Economics of Speed",
-        "source": "Budish, Cramton & Shim (2015 + 2023)",
+        "source": "Budish, Cramton & Shim (2015 + 2023 follow-ups)",
         "summary": "High-frequency traders exploit millisecond edges for tiny profits, distorting price discovery and social welfare.",
         "example": "A trader co-locates servers to shave microseconds off quote delivery and capture fleeting price spreads.",
         "importance": "Highlights need for fair-access rules (e.g. frequent batch auctions, speed bumps).",
@@ -85,19 +85,19 @@ STUDIES = [
         "explanation": "Models multi-protocol collateral webs and their fragility under price shocks.",
         "projects": [
             "Aave v3 (layered collateral)",
-            "Compound, MakerDAO stress tests",
-            "Risk modeling in Gauntlet simulations",
+            "Compound & MakerDAO stress tests",
+            "Gauntlet simulation frameworks",
         ],
     },
     {
         "title": "Stablecoin Peg Risk: When “1 : 1” Isn’t Enough",
         "source": "Chicago Booth Working Paper, 2023",
         "summary": "Even fully collateralized stablecoins can break peg due to run-dynamics, liquidity spirals, and feedback loops.",
-        "example": "A sudden redemption wave forces collateral sales, pushing prices below the peg in a liquidity crunch.",
+        "example": "A redemption wave forces collateral sales, pushing prices below the peg in a liquidity crunch.",
         "importance": "Vital for regulatory frameworks and smart-contract insurance models.",
         "explanation": "Breaks down the mechanics of liquidity spirals and the role of market makers in peg maintenance.",
         "projects": [
-            "MakerDAO DAI (multi-collateral stability)",
+            "MakerDAO DAI (multi-collateral)",
             "USDC & USDT risk assessments",
             "Algorithmic stablecoins (e.g. FRAX)",
         ],
@@ -122,7 +122,6 @@ def fetch_crossref_url(title):
         return None
 
 def make_index_html(studies):
-    # Header + CSS (icons assumed in /icons/)
     header = """<!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="UTF-8">
@@ -167,9 +166,8 @@ def make_index_html(studies):
     .notable {
       font-style:italic; margin-top:.2rem; margin-bottom:1rem;
     }
-    .section { margin:1rem 0; }
-    .section-icon {
-      width:1.2em; vertical-align:middle; margin-right:.5em;
+    .label {
+      font-weight:bold; margin-top:1rem; display:block;
     }
     ul { margin:.5em 0 1em 1.5em; }
     ul li { margin-bottom:.3em; }
@@ -183,7 +181,7 @@ def make_index_html(studies):
 
     parts = [header]
 
-    # ── Track 1 ──
+    # Track 1
     for s in studies[:5]:
         url = fetch_crossref_url(s["title"])
         title_html = f'<a href="{url}" target="_blank">{s["title"]}</a>' if url else s["title"]
@@ -196,7 +194,7 @@ def make_index_html(studies):
     <p class="notable">Why it’s notable: {s["notable"]}</p>
   </div>""")
 
-    # ── Track 2 ──
+    # Track 2
     parts.append("\n  <h1>Architectures of Capital</h1><hr>")
     for s in studies[5:]:
         url = fetch_crossref_url(s["title"])
@@ -206,36 +204,20 @@ def make_index_html(studies):
   <div class="study">
     <h2>{title_html}</h2>
     <span class="source">{s["source"]}</span>
-    <div class="section">
-      <img src="icons/summary.png" class="section-icon" alt="">
-      <strong>Summary:</strong>
-      <p>{s["summary"]}</p>
-    </div>
-    <div class="section">
-      <img src="icons/example.png" class="section-icon" alt="">
-      <strong>Example:</strong>
-      <p>{s["example"]}</p>
-    </div>
-    <div class="section">
-      <img src="icons/importance.png" class="section-icon" alt="">
-      <strong>Why it’s important:</strong>
-      <p>{s["importance"]}</p>
-    </div>
-    <div class="section">
-      <img src="icons/explanation.png" class="section-icon" alt="">
-      <strong>Further explanation:</strong>
-      <p>{s["explanation"]}</p>
-    </div>
-    <div class="section">
-      <img src="icons/projects.png" class="section-icon" alt="">
-      <strong>Projects using this:</strong>
-      <ul>
-        {proj_list}
-      </ul>
-    </div>
+    <span class="label">Summary:</span>
+    <p>{s["summary"]}</p>
+    <span class="label">Example:</span>
+    <p>{s["example"]}</p>
+    <span class="label">Why it’s powerful:</span>
+    <p>{s["importance"]}</p>
+    <span class="label">Further explanation:</span>
+    <p>{s["explanation"]}</p>
+    <span class="label">Projects using this:</span>
+    <ul>
+      {proj_list}
+    </ul>
   </div>""")
 
-    # Footer with toggle script
     footer = """
   <script>
     function toggleDarkMode() {
