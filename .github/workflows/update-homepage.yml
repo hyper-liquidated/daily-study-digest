@@ -1,11 +1,11 @@
 name: Auto Update Homepage
 
 permissions:
-  contents: write   # let the GITHUB_TOKEN push back to main
+  contents: write
 
 on:
   schedule:
-    - cron: '0 10 * * *'   # daily at 5 AM Eastern
+    - cron: '0 10 * * *'
   workflow_dispatch:
 
 jobs:
