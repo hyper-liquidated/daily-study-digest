@@ -1,38 +1,44 @@
 name: Auto Update Daily Study Feed
+
+permissions:
+  contents: write
+
 on:
   schedule:
-    # 09:00 UTC = 5 AM ET
-    - cron: '0 9 * * *'
+    - cron: '0 9 * * *'          # 09 UTC = 5 AM ET
   workflow_dispatch:
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      # A) Checkout this Pages repo
-      - uses: actions/checkout@v3
+      # 1) Checkout THIS Pages repo into folder “pages”
+      - name: Checkout pages repo
+        uses: actions/checkout@v3
         with:
           path: pages
 
-      # B) Checkout your source repo
-      - uses: actions/checkout@v3
+      # 2) Checkout the SOURCE repo (study-source) into folder “source”
+      - name: Checkout study-source repo
+        uses: actions/checkout@v3            # ← same action
         with:
-          repository: hyper-liquidated/study-source
+          repository: hyper-liquidated/study-source   # owner/repo of Repo A
+          token: ${{ secrets.SOURCE_PAT }}             # PAT you just added
           path: source
 
-      # C) Copy fresh JSON
-      - name: Copy new studies.json
+      # 3) Copy the fresh JSON into pages/data
+      - name: Copy studies.json
         run: |
           cp source/data/studies.json pages/data/studies.json
 
-      # D) Build HTML & RSS
-      - name: Build feed & page
+      # 4) Build homepage & RSS from that JSON
+      - name: Build & render
         run: |
           cd pages
           python scripts/generate_feed.py
 
-      # E) Commit & push
-      - name: Commit & publish
+      # 5) Commit & publish if anything changed
+      - name: Commit & push
         run: |
           cd pages
           git config user.name "GitHub Actions"
