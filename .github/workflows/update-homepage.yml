@@ -6,7 +6,7 @@ permissions:
 
 on:
   schedule:
-    - cron: '0 9 * * *'      # 09 UTC → 05 AM ET daily
+    - cron: '0 9 * * *'      # 09 UTC → 05 AM ET (summer) / 04 AM ET (winter)
   workflow_dispatch:         # manual trigger button
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
 
     steps:
     # ──────────────────────────────────────────────────────────────
-    # 1) Checkout THIS Pages repo – do NOT keep the default token
+    # 1) Checkout THIS Pages repo
     - name: Checkout pages repo
       uses: actions/checkout@v3
       with:
@@ -24,14 +24,14 @@ jobs:
 
     # ──────────────────────────────────────────────────────────────
     # 2) Checkout the SOURCE repo that contains the fresh studies.json
-    #    If the source repo is public → token: ""
-    #    If private → token: ${{ secrets.SOURCE_PAT }}
     - name: Checkout study-source repo
       uses: actions/checkout@v3
       with:
         repository: hyper-liquidated/study-source   # owner/repo of source
-        token: ""                                   # "" = anonymous clone
         path: source
+        # If the source repo ever becomes PRIVATE, create a secret called
+        # SOURCE_PAT (scoped to `repo`) and uncomment the next line:
+        # token: ${{ secrets.SOURCE_PAT }}
 
     # ──────────────────────────────────────────────────────────────
     # 3) Copy the fresh JSON into this repo’s data folder
@@ -39,7 +39,7 @@ jobs:
       run: cp source/data/studies.json pages/data/studies.json
 
     # ──────────────────────────────────────────────────────────────
-    # 4) Rebuild homepage & RSS from that JSON
+    # 4) Rebuild homepage & RSS
     - name: Build homepage & RSS
       run: |
         cd pages
@@ -61,7 +61,7 @@ jobs:
         if ! git diff --cached --quiet; then
           git commit -m "Auto-regenerate homepage"
 
-          # rewrite remote to embed the token so push is authenticated
+          # authenticate push with the workflow token
           git remote set-url origin \
             https://x-access-token:${TOKEN}@github.com/${REPO}.git
 
