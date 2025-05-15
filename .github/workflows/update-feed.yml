@@ -19,11 +19,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      # 2) Grab the latest RSS file
+      # 2) Download the latest feed from the source repo (raw file URL)
       - name: Download latest RSS feed
         run: |
           curl -fsSL -o daily_study_digest.xml \
-            https://hyper-liquidated.github.io/daily-study-digest-source/rss.xml
+            https://raw.githubusercontent.com/hyper-liquidated/daily-study-digest-source/main/rss.xml
 
       # 3) Commit & push only when the file changed
       - name: Commit and push if changed
