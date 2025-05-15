@@ -4,61 +4,108 @@ from pathlib import Path
 
 # ─── Your 10 studies ────────────────────────────────────────────────────────────
 STUDIES = [
+    # ── Track 1 ── add a "notable" field for each
     {
         "title": "The Paradox of Choice Revisited",
         "source": "Journal of Experimental Psychology: General, 2024",
         "summary": "Revisits the famous “jam experiment” and finds that fewer choices consistently result in faster decisions and greater satisfaction.",
+        "notable": "Strong real-world implications for marketing, UI design, and productivity systems.",
     },
     {
         "title": "The Inheritance Lottery: How Family Wealth Shapes Risk-Taking and Innovation",
         "source": "Quarterly Journal of Economics, 2024",
         "summary": "Shows unexpected inheritances increase entrepreneurship — but only among top-wealth households.",
+        "notable": "Fresh look at inequality’s influence on ambition and intergenerational mobility.",
     },
     {
         "title": "How Cities Shape Mental Health: Noise, Density, and Access",
         "source": "Lancet Public Health, 2023",
         "summary": "Green space and access to services reduce anxiety, while noise and isolation increase risk across dozens of cities.",
+        "notable": "Provides quantifiable design guidelines for healthier urban planning.",
     },
     {
         "title": "The Scarcity Mindset Revisited: Cognitive Load or Learned Helplessness?",
         "source": "Nature Human Behaviour, 2024",
         "summary": "Proposes “learned helplessness” rather than “bandwidth tax” as the mechanism behind scarcity’s cognitive impacts.",
+        "notable": "Challenges decades of scarcity-mindset interventions with a new psychological model.",
     },
     {
         "title": "Algorithmic Nudges for Civic Participation",
         "source": "PNAS, 2023",
         "summary": "Shows that simple reminder emails outperform social-media campaigns in boosting voter turnout and civic engagement.",
+        "notable": "Directly informs government outreach strategies and platform design.",
     },
+
+    # ── Track 2 ── each gets 5 fields
     {
         "title": "What Is a Zero-Knowledge Proof (ZKP) and Why Should You Care?",
         "source": "Ethereum Foundation blog series, 2024",
         "summary": "A ZKP lets you prove you know something—say, a wallet password—without revealing the underlying details.",
+        "example": "Prove you’re over 18 without exposing your birthdate—ZKPs verify the >18 claim without personal data.",
+        "importance": "Core to privacy and scaling in crypto (e.g. Zcash, zk-rollups on Ethereum).",
+        "explanation": "Recursive SNARKs stack proofs into one, compressing thousands of computations into a single verifiable proof.",
+        "projects": [
+            "Zcash (privacy)",
+            "Polygon zkEVM (Ethereum scaling)",
+            "Mina Protocol (constant‐size blockchain state)",
+        ],
     },
     {
         "title": "Latency Arbitrage and the Hidden Economics of Speed",
-        "source": "Budish, Cramton & Shim (2015 + 2023 follow-ups)",
-        "summary": "High-frequency traders exploit millisecond speed edges for tiny profits, distorting price discovery and social welfare.",
+        "source": "Budish, Cramton & Shim (2015 + 2023)",
+        "summary": "High-frequency traders exploit millisecond edges for tiny profits, distorting price discovery and social welfare.",
+        "example": "A trader co-locates servers to shave microseconds off quote delivery and capture fleeting price spreads.",
+        "importance": "Highlights need for fair-access rules (e.g. frequent batch auctions, speed bumps).",
+        "explanation": "Explores how zero-sum speed races erode market quality and push costs onto ordinary investors.",
+        "projects": [
+            "IEX (speed bump exchange)",
+            "Flashbots (MEV protection)",
+            "Jito (Solana batching)",
+        ],
     },
     {
         "title": "Rollups & Data Availability: Why Scaling Isn’t Just About Throughput",
         "source": "Celestia & StarkWare blogs, 2024",
-        "summary": "Rollups aggregate transactions to boost throughput, but without guaranteed on-chain data availability, users can’t independently verify state.",
+        "summary": "Rollups batch transactions off-chain but without guaranteed on-chain data availability, users can’t verify state transitions.",
+        "example": "A rollup publishes a batch hash but omits full calldata—nodes can’t reconstruct actual state changes.",
+        "importance": "Data availability is the bedrock of decentralization in modular Ethereum.",
+        "explanation": "Compares on-chain vs. off-chain publication models and their censorship-resistance trade-offs.",
+        "projects": [
+            "Celestia (DA layer)",
+            "zkSync (Ethereum rollup)",
+            "EigenDA (restaking DA)",
+        ],
     },
     {
         "title": "Collateral Rehypothecation in DeFi Lending Markets",
         "source": "Gauntlet Research, 2024",
         "summary": "Analyzes how Aave and Compound reuse deposited collateral across protocols, creating hidden leverage chains.",
+        "example": "User deposits ETH in Aave; that ETH is re-lent on Compound, which in turn is used again in another protocol.",
+        "importance": "Uncovers systemic risk and cascading liquidations under stress.",
+        "explanation": "Models multi-protocol collateral webs and their fragility under price shocks.",
+        "projects": [
+            "Aave v3 (layered collateral)",
+            "Compound, MakerDAO stress tests",
+            "Risk modeling in Gauntlet simulations",
+        ],
     },
     {
         "title": "Stablecoin Peg Risk: When “1 : 1” Isn’t Enough",
         "source": "Chicago Booth Working Paper, 2023",
-        "summary": "Even fully collateralized stablecoins can break peg due to run-dynamics, liquidity spirals, and price-path dependencies.",
+        "summary": "Even fully collateralized stablecoins can break peg due to run-dynamics, liquidity spirals, and feedback loops.",
+        "example": "A sudden redemption wave forces collateral sales, pushing prices below the peg in a liquidity crunch.",
+        "importance": "Vital for regulatory frameworks and smart-contract insurance models.",
+        "explanation": "Breaks down the mechanics of liquidity spirals and the role of market makers in peg maintenance.",
+        "projects": [
+            "MakerDAO DAI (multi-collateral stability)",
+            "USDC & USDT risk assessments",
+            "Algorithmic stablecoins (e.g. FRAX)",
+        ],
     },
 ]
 # ────────────────────────────────────────────────────────────────────────────────
 
 def fetch_crossref_url(title):
-    """Return a DOI.org link or None if lookup fails."""
     try:
         resp = requests.get(
             "https://api.crossref.org/works",
@@ -75,6 +122,7 @@ def fetch_crossref_url(title):
         return None
 
 def make_index_html(studies):
+    # Header + CSS (icons assumed in /icons/)
     header = """<!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="UTF-8">
@@ -82,24 +130,21 @@ def make_index_html(studies):
   <title>Daily Study Digest</title>
   <style>
     :root {
-      --bg: #fff; --fg: #111;
-      --link: #0066cc; --divider: #ccc;
+      --bg: #fff; --fg: #111; --link: #0066cc; --divider: #ccc;
     }
     body.dark-mode {
-      --bg: #121212; --fg: #e0e0e0;
-      --link: #88c0d0; --divider: #444;
+      --bg: #121212; --fg: #e0e0e0; --link: #88c0d0; --divider: #444;
     }
     body {
       margin:0; padding:2rem;
       font-family:sans-serif;
-      background-color:var(--bg);
+      background:var(--bg);
       color:var(--fg);
       line-height:1.5;
     }
     .toggle-btn {
       position:fixed; top:1rem; right:1rem;
-      background:none; border:none;
-      font-size:1.5rem; cursor:pointer;
+      background:none; border:none; font-size:1.5rem; cursor:pointer;
       color:var(--fg);
     }
     a { color:var(--link); text-decoration:none; }
@@ -116,14 +161,18 @@ def make_index_html(studies):
       text-decoration:underline;
     }
     .source {
-      font-size:.9rem; color:gray;
-      margin-bottom:.5rem; display:block;
+      display:block; font-size:.9rem; color:gray;
+      margin-bottom:.5rem;
     }
-    .label {
-      font-weight:bold;
-      margin-top:.5rem;
-      display:block;
+    .notable {
+      font-style:italic; margin-top:.2rem; margin-bottom:1rem;
     }
+    .section { margin:1rem 0; }
+    .section-icon {
+      width:1.2em; vertical-align:middle; margin-right:.5em;
+    }
+    ul { margin:.5em 0 1em 1.5em; }
+    ul li { margin-bottom:.3em; }
     hr { border:0; border-top:1px solid var(--divider); margin:2rem 0; }
   </style>
 </head><body>
@@ -132,44 +181,70 @@ def make_index_html(studies):
 
   <h1>The Social Layer</h1><hr>"""
 
-    block_tpl = """
-  <div class="study">
-    <h2>{title_html}</h2>
-    <span class="source">{source}</span>
-    <span class="label">Summary:</span>
-    <p>{summary}</p>
-  </div>"""
-
     parts = [header]
 
-    # Track 1
+    # ── Track 1 ──
     for s in studies[:5]:
         url = fetch_crossref_url(s["title"])
         title_html = f'<a href="{url}" target="_blank">{s["title"]}</a>' if url else s["title"]
-        parts.append(block_tpl.format(
-            title_html=title_html,
-            source=s["source"],
-            summary=s["summary"]
-        ))
+        parts.append(f"""
+  <div class="study">
+    <h2>{title_html}</h2>
+    <span class="source">{s["source"]}</span>
+    <span class="label">Summary:</span>
+    <p>{s["summary"]}</p>
+    <p class="notable">Why it’s notable: {s["notable"]}</p>
+  </div>""")
 
-    # Track 2
+    # ── Track 2 ──
     parts.append("\n  <h1>Architectures of Capital</h1><hr>")
     for s in studies[5:]:
         url = fetch_crossref_url(s["title"])
         title_html = f'<a href="{url}" target="_blank">{s["title"]}</a>' if url else s["title"]
-        parts.append(block_tpl.format(
-            title_html=title_html,
-            source=s["source"],
-            summary=s["summary"]
-        ))
+        proj_list = "\n".join(f"<li>{p}</li>" for p in s["projects"])
+        parts.append(f"""
+  <div class="study">
+    <h2>{title_html}</h2>
+    <span class="source">{s["source"]}</span>
+    <div class="section">
+      <img src="icons/summary.png" class="section-icon" alt="">
+      <strong>Summary:</strong>
+      <p>{s["summary"]}</p>
+    </div>
+    <div class="section">
+      <img src="icons/example.png" class="section-icon" alt="">
+      <strong>Example:</strong>
+      <p>{s["example"]}</p>
+    </div>
+    <div class="section">
+      <img src="icons/importance.png" class="section-icon" alt="">
+      <strong>Why it’s important:</strong>
+      <p>{s["importance"]}</p>
+    </div>
+    <div class="section">
+      <img src="icons/explanation.png" class="section-icon" alt="">
+      <strong>Further explanation:</strong>
+      <p>{s["explanation"]}</p>
+    </div>
+    <div class="section">
+      <img src="icons/projects.png" class="section-icon" alt="">
+      <strong>Projects using this:</strong>
+      <ul>
+        {proj_list}
+      </ul>
+    </div>
+  </div>""")
 
+    # Footer with toggle script
     footer = """
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
       localStorage.theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
     }
-    if (localStorage.theme==='dark') document.body.classList.add('dark-mode');
+    if (localStorage.theme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
   </script>
 </body></html>"""
 
