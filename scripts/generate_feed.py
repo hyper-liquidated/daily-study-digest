@@ -163,9 +163,6 @@ def make_index_html(studies):
       display:block; font-size:.9rem; color:gray;
       margin-bottom:.5rem;
     }
-    .notable {
-      font-style:italic; margin-top:.2rem; margin-bottom:1rem;
-    }
     .label {
       font-weight:bold; margin-top:1rem; display:block;
     }
@@ -191,7 +188,8 @@ def make_index_html(studies):
     <span class="source">{s["source"]}</span>
     <span class="label">Summary:</span>
     <p>{s["summary"]}</p>
-    <p class="notable">Why it’s notable: {s["notable"]}</p>
+    <span class="label">Why it’s notable:</span>
+    <p>{s["notable"]}</p>
   </div>""")
 
     # Track 2
