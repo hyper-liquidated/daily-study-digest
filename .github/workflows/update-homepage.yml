@@ -41,18 +41,25 @@ jobs:
           cd pages
           python scripts/generate_feed.py
 
-            # 5) Commit & push if changed
+                  # 5) Commit & push if changed
       - name: Commit & publish
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO:  ${{ github.repository }}
         run: |
           cd pages
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add data/studies.json index.html daily_study_digest.xml
-          git diff --cached --quiet || git commit -m "Auto-regenerate homepage"
 
-          # --- inject the GITHUB_TOKEN for this repo into the remote URL ---
-          git remote set-url origin \
-            https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          # commit only if there are staged changes
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto-regenerate homepage"
 
-          git push origin main   # now authenticated
+            # push with token embedded in the URL
+            git push "https://x-access-token:${TOKEN}@github.com/${REPO}.git" HEAD:main
+          else
+            echo "No changes – nothing to push."
+          fi
 
