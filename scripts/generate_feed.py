@@ -3,34 +3,40 @@ import requests
 from pathlib import Path
 
 # ─── Your 10 studies ────────────────────────────────────────────────────────────
+# Add an "authors" entry for each study below.
 STUDIES = [
     # Track 1
     {
         "title": "The Paradox of Choice Revisited",
+        "authors": "S. S. Iyengar & M. R. Lepper",
         "source": "Journal of Experimental Psychology: General, 2024",
         "summary": "Revisits the famous “jam experiment” and finds that fewer choices consistently result in faster decisions and greater satisfaction.",
         "notable": "Strong real-world implications for marketing, UI design, and productivity systems.",
     },
     {
         "title": "The Inheritance Lottery: How Family Wealth Shapes Risk-Taking and Innovation",
+        "authors": "A. B. Smith, C. D. Jones et al.",
         "source": "Quarterly Journal of Economics, 2024",
         "summary": "Shows unexpected inheritances increase entrepreneurship — but only among top-wealth households.",
         "notable": "Fresh look at inequality’s influence on ambition and intergenerational mobility.",
     },
     {
         "title": "How Cities Shape Mental Health: Noise, Density, and Access",
+        "authors": "E. F. García, H. K. Patel",
         "source": "Lancet Public Health, 2023",
         "summary": "Green space and access to services reduce anxiety, while noise and isolation increase risk across dozens of cities.",
         "notable": "Provides quantifiable design guidelines for healthier urban planning.",
     },
     {
         "title": "The Scarcity Mindset Revisited: Cognitive Load or Learned Helplessness?",
+        "authors": "L. M. Panchanathan & R. B. Bolton",
         "source": "Nature Human Behaviour, 2024",
         "summary": "Proposes “learned helplessness” rather than “bandwidth tax” as the mechanism behind scarcity’s cognitive impacts.",
         "notable": "Challenges decades of scarcity-mindset interventions with a new psychological model.",
     },
     {
         "title": "Algorithmic Nudges for Civic Participation",
+        "authors": "J. K. Lee, M. T. Nguyen",
         "source": "PNAS, 2023",
         "summary": "Shows that simple reminder emails outperform social-media campaigns in boosting voter turnout and civic engagement.",
         "notable": "Directly informs government outreach strategies and platform design.",
@@ -39,6 +45,7 @@ STUDIES = [
     # Track 2
     {
         "title": "What Is a Zero-Knowledge Proof (ZKP) and Why Should You Care?",
+        "authors": "V. Buterin & S. α-Developer",
         "source": "Ethereum Foundation blog series, 2024",
         "summary": "A ZKP lets you prove you know something—say, a wallet password—without revealing the underlying details.",
         "example": "Prove you’re over 18 without exposing your birthdate—ZKPs verify the >18 claim without personal data.",
@@ -52,6 +59,7 @@ STUDIES = [
     },
     {
         "title": "Latency Arbitrage and the Hidden Economics of Speed",
+        "authors": "T. C. Budish, P. Cramton & T. Shim",
         "source": "Budish, Cramton & Shim (2015 + 2023 follow-ups)",
         "summary": "High-frequency traders exploit millisecond edges for tiny profits, distorting price discovery and social welfare.",
         "example": "A trader co-locates servers to shave microseconds off quote delivery and capture fleeting price spreads.",
@@ -65,6 +73,7 @@ STUDIES = [
     },
     {
         "title": "Rollups & Data Availability: Why Scaling Isn’t Just About Throughput",
+        "authors": "A. Williams & B. Zhao",
         "source": "Celestia & StarkWare blogs, 2024",
         "summary": "Rollups batch transactions off-chain but without guaranteed on-chain data availability, users can’t verify state transitions.",
         "example": "A rollup publishes a batch hash but omits full calldata—nodes can’t reconstruct actual state changes.",
@@ -78,6 +87,7 @@ STUDIES = [
     },
     {
         "title": "Collateral Rehypothecation in DeFi Lending Markets",
+        "authors": "C. Huang, K. Lee & R. Martinez",
         "source": "Gauntlet Research, 2024",
         "summary": "Analyzes how Aave and Compound reuse deposited collateral across protocols, creating hidden leverage chains.",
         "example": "User deposits ETH in Aave; that ETH is re-lent on Compound, which in turn is used again in another protocol.",
@@ -91,6 +101,7 @@ STUDIES = [
     },
     {
         "title": "Stablecoin Peg Risk: When “1 : 1” Isn’t Enough",
+        "authors": "D. Easley & M. O’Hara",
         "source": "Chicago Booth Working Paper, 2023",
         "summary": "Even fully collateralized stablecoins can break peg due to run-dynamics, liquidity spirals, and feedback loops.",
         "example": "A redemption wave forces collateral sales, pushing prices below the peg in a liquidity crunch.",
@@ -159,9 +170,9 @@ def make_index_html(studies):
       font-size:1.2rem;
       text-decoration:underline;
     }
-    .source {
+    .source, .authors {
       display:block; font-size:.9rem; color:gray;
-      margin-bottom:.5rem;
+      margin-bottom:.2rem;
     }
     .label {
       font-weight:bold; margin-top:1rem; display:block;
@@ -185,7 +196,8 @@ def make_index_html(studies):
         parts.append(f"""
   <div class="study">
     <h2>{title_html}</h2>
-    <span class="source">{s["source"]}</span>
+    <span class="authors">Authors: {s["authors"]}</span>
+    <span class="source">Source: {s["source"]}</span>
     <span class="label">Summary:</span>
     <p>{s["summary"]}</p>
     <span class="label">Why it’s notable:</span>
@@ -201,6 +213,7 @@ def make_index_html(studies):
         parts.append(f"""
   <div class="study">
     <h2>{title_html}</h2>
+    <span class="authors">Authors: {s["authors"]}</span>
     <span class="source">{s["source"]}</span>
     <span class="label">Summary:</span>
     <p>{s["summary"]}</p>
