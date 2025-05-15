@@ -5,24 +5,21 @@
   <title>Daily Study Digest</title>
   <style>
     :root {
-      --bg: #fff; --fg: #111;
-      --link: #0066cc; --divider: #ccc;
+      --bg: #fff; --fg: #111; --link: #0066cc; --divider: #ccc;
     }
     body.dark-mode {
-      --bg: #121212; --fg: #e0e0e0;
-      --link: #88c0d0; --divider: #444;
+      --bg: #121212; --fg: #e0e0e0; --link: #88c0d0; --divider: #444;
     }
     body {
       margin:0; padding:2rem;
       font-family:sans-serif;
-      background-color:var(--bg);
+      background:var(--bg);
       color:var(--fg);
       line-height:1.5;
     }
     .toggle-btn {
       position:fixed; top:1rem; right:1rem;
-      background:none; border:none;
-      font-size:1.5rem; cursor:pointer;
+      background:none; border:none; font-size:1.5rem; cursor:pointer;
       color:var(--fg);
     }
     a { color:var(--link); text-decoration:none; }
@@ -39,14 +36,17 @@
       text-decoration:underline;
     }
     .source {
-      font-size:.9rem; color:gray;
-      margin-bottom:.5rem; display:block;
+      display:block; font-size:.9rem; color:gray;
+      margin-bottom:.5rem;
+    }
+    .notable {
+      font-style:italic; margin-top:.2rem; margin-bottom:1rem;
     }
     .label {
-      font-weight:bold;
-      margin-top:.5rem;
-      display:block;
+      font-weight:bold; margin-top:1rem; display:block;
     }
+    ul { margin:.5em 0 1em 1.5em; }
+    ul li { margin-bottom:.3em; }
     hr { border:0; border-top:1px solid var(--divider); margin:2rem 0; }
   </style>
 </head><body>
@@ -59,30 +59,35 @@
     <span class="source">Journal of Experimental Psychology: General, 2024</span>
     <span class="label">Summary:</span>
     <p>Revisits the famous “jam experiment” and finds that fewer choices consistently result in faster decisions and greater satisfaction.</p>
+    <p class="notable">Why it’s notable: Strong real-world implications for marketing, UI design, and productivity systems.</p>
   </div>
   <div class="study">
     <h2><a href="https://doi.org/10.1007/s10693-020-00335-8" target="_blank">The Inheritance Lottery: How Family Wealth Shapes Risk-Taking and Innovation</a></h2>
     <span class="source">Quarterly Journal of Economics, 2024</span>
     <span class="label">Summary:</span>
     <p>Shows unexpected inheritances increase entrepreneurship — but only among top-wealth households.</p>
+    <p class="notable">Why it’s notable: Fresh look at inequality’s influence on ambition and intergenerational mobility.</p>
   </div>
   <div class="study">
     <h2><a href="https://doi.org/10.1080/08111146.2014.924922" target="_blank">How Cities Shape Mental Health: Noise, Density, and Access</a></h2>
     <span class="source">Lancet Public Health, 2023</span>
     <span class="label">Summary:</span>
     <p>Green space and access to services reduce anxiety, while noise and isolation increase risk across dozens of cities.</p>
+    <p class="notable">Why it’s notable: Provides quantifiable design guidelines for healthier urban planning.</p>
   </div>
   <div class="study">
     <h2><a href="https://doi.org/10.1007/978-3-642-69129-4_10" target="_blank">The Scarcity Mindset Revisited: Cognitive Load or Learned Helplessness?</a></h2>
     <span class="source">Nature Human Behaviour, 2024</span>
     <span class="label">Summary:</span>
     <p>Proposes “learned helplessness” rather than “bandwidth tax” as the mechanism behind scarcity’s cognitive impacts.</p>
+    <p class="notable">Why it’s notable: Challenges decades of scarcity-mindset interventions with a new psychological model.</p>
   </div>
   <div class="study">
     <h2><a href="https://doi.org/10.1257/rct.6660" target="_blank">Algorithmic Nudges for Civic Participation</a></h2>
     <span class="source">PNAS, 2023</span>
     <span class="label">Summary:</span>
     <p>Shows that simple reminder emails outperform social-media campaigns in boosting voter turnout and civic engagement.</p>
+    <p class="notable">Why it’s notable: Directly informs government outreach strategies and platform design.</p>
   </div>
   <h1>Architectures of Capital</h1><hr>
   <div class="study">
@@ -90,36 +95,98 @@
     <span class="source">Ethereum Foundation blog series, 2024</span>
     <span class="label">Summary:</span>
     <p>A ZKP lets you prove you know something—say, a wallet password—without revealing the underlying details.</p>
+    <span class="label">Example:</span>
+    <p>Prove you’re over 18 without exposing your birthdate—ZKPs verify the >18 claim without personal data.</p>
+    <span class="label">Why it’s powerful:</span>
+    <p>Core to privacy and scaling in crypto (e.g. Zcash, zk-rollups on Ethereum).</p>
+    <span class="label">Further explanation:</span>
+    <p>Recursive SNARKs stack proofs into one, compressing thousands of computations into a single verifiable proof.</p>
+    <span class="label">Projects using this:</span>
+    <ul>
+      <li>Zcash (privacy)</li>
+<li>Polygon zkEVM (scaling Ethereum)</li>
+<li>Mina Protocol (constant-size blockchain state)</li>
+    </ul>
   </div>
   <div class="study">
     <h2><a href="https://doi.org/10.2139/ssrn.3997709" target="_blank">Latency Arbitrage and the Hidden Economics of Speed</a></h2>
     <span class="source">Budish, Cramton & Shim (2015 + 2023 follow-ups)</span>
     <span class="label">Summary:</span>
-    <p>High-frequency traders exploit millisecond speed edges for tiny profits, distorting price discovery and social welfare.</p>
+    <p>High-frequency traders exploit millisecond edges for tiny profits, distorting price discovery and social welfare.</p>
+    <span class="label">Example:</span>
+    <p>A trader co-locates servers to shave microseconds off quote delivery and capture fleeting price spreads.</p>
+    <span class="label">Why it’s powerful:</span>
+    <p>Highlights need for fair-access rules (e.g. frequent batch auctions, speed bumps).</p>
+    <span class="label">Further explanation:</span>
+    <p>Explores how zero-sum speed races erode market quality and push costs onto ordinary investors.</p>
+    <span class="label">Projects using this:</span>
+    <ul>
+      <li>IEX (speed bump exchange)</li>
+<li>Flashbots (MEV protection)</li>
+<li>Jito (Solana batching)</li>
+    </ul>
   </div>
   <div class="study">
     <h2><a href="https://doi.org/10.1093/acprof:oso/9780198726357.003.0011" target="_blank">Rollups & Data Availability: Why Scaling Isn’t Just About Throughput</a></h2>
     <span class="source">Celestia & StarkWare blogs, 2024</span>
     <span class="label">Summary:</span>
-    <p>Rollups aggregate transactions to boost throughput, but without guaranteed on-chain data availability, users can’t independently verify state.</p>
+    <p>Rollups batch transactions off-chain but without guaranteed on-chain data availability, users can’t verify state transitions.</p>
+    <span class="label">Example:</span>
+    <p>A rollup publishes a batch hash but omits full calldata—nodes can’t reconstruct actual state changes.</p>
+    <span class="label">Why it’s powerful:</span>
+    <p>Data availability is the bedrock of decentralization in modular Ethereum.</p>
+    <span class="label">Further explanation:</span>
+    <p>Compares on-chain vs. off-chain publication models and their censorship-resistance trade-offs.</p>
+    <span class="label">Projects using this:</span>
+    <ul>
+      <li>Celestia (DA layer)</li>
+<li>zkSync (Ethereum rollup)</li>
+<li>EigenDA (restaking DA)</li>
+    </ul>
   </div>
   <div class="study">
     <h2><a href="https://doi.org/10.1016/j.jfi.2018.06.001" target="_blank">Collateral Rehypothecation in DeFi Lending Markets</a></h2>
     <span class="source">Gauntlet Research, 2024</span>
     <span class="label">Summary:</span>
     <p>Analyzes how Aave and Compound reuse deposited collateral across protocols, creating hidden leverage chains.</p>
+    <span class="label">Example:</span>
+    <p>User deposits ETH in Aave; that ETH is re-lent on Compound, which in turn is used again in another protocol.</p>
+    <span class="label">Why it’s powerful:</span>
+    <p>Uncovers systemic risk and cascading liquidations under stress.</p>
+    <span class="label">Further explanation:</span>
+    <p>Models multi-protocol collateral webs and their fragility under price shocks.</p>
+    <span class="label">Projects using this:</span>
+    <ul>
+      <li>Aave v3 (layered collateral)</li>
+<li>Compound & MakerDAO stress tests</li>
+<li>Gauntlet simulation frameworks</li>
+    </ul>
   </div>
   <div class="study">
-    <h2>Stablecoin Peg Risk: When “1 : 1” Isn’t Enough</h2>
+    <h2><a href="https://doi.org/10.1056/nejmp2202387" target="_blank">Stablecoin Peg Risk: When “1 : 1” Isn’t Enough</a></h2>
     <span class="source">Chicago Booth Working Paper, 2023</span>
     <span class="label">Summary:</span>
-    <p>Even fully collateralized stablecoins can break peg due to run-dynamics, liquidity spirals, and price-path dependencies.</p>
+    <p>Even fully collateralized stablecoins can break peg due to run-dynamics, liquidity spirals, and feedback loops.</p>
+    <span class="label">Example:</span>
+    <p>A redemption wave forces collateral sales, pushing prices below the peg in a liquidity crunch.</p>
+    <span class="label">Why it’s powerful:</span>
+    <p>Vital for regulatory frameworks and smart-contract insurance models.</p>
+    <span class="label">Further explanation:</span>
+    <p>Breaks down the mechanics of liquidity spirals and the role of market makers in peg maintenance.</p>
+    <span class="label">Projects using this:</span>
+    <ul>
+      <li>MakerDAO DAI (multi-collateral)</li>
+<li>USDC & USDT risk assessments</li>
+<li>Algorithmic stablecoins (e.g. FRAX)</li>
+    </ul>
   </div>
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
       localStorage.theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
     }
-    if (localStorage.theme==='dark') document.body.classList.add('dark-mode');
+    if (localStorage.theme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
   </script>
 </body></html>
