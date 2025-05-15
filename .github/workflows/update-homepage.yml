@@ -6,9 +6,7 @@ permissions:
   contents: write
 
 on:
-  schedule:
-    - cron: '0 10 * * *'   # Every day at 5 AM Eastern
-  workflow_dispatch:
+  workflow_dispatch:  # only when you click “Run workflow” by hand
 
 jobs:
   update-homepage:
