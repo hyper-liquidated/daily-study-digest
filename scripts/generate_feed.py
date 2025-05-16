@@ -75,53 +75,37 @@ FOOTER = """
 # ─── Build HTML ────────────────────────────────────────────────────────────────
 parts = [HEADER]
 
-# Track 1 header
+# Track 1
 parts.append("  <h1>The Social Layer</h1><hr>\n")
 for s in STUDIES[:5]:
-    title = s.get("title", "Untitled Study")
-    authors = s.get("authors", "")
-    source  = s.get("source", "")
-    summary = s.get("summary", "")
-    notable = s.get("why_notable", s.get("notable", ""))
-
     parts.append(f"""
   <div class="study">
-    <h2>{title}</h2>
-    <span class="authors">Authors: {authors}</span>
-    <span class="source">Source: {source}</span>
+    <h2>{s.get("title","")}</h2>
+    <span class="authors">Authors: {s.get("authors","")}</span>
+    <span class="source">Source: {s.get("source","")}</span>
     <span class="label">Summary:</span>
-    <p>{summary}</p>
+    <p>{s.get("summary","")}</p>
     <span class="label">Why it’s notable:</span>
-    <p>{notable}</p>
+    <p>{s.get("why_notable",s.get("notable",""))}</p>
   </div>""")
 
-# Track 2 header
+# Track 2
 parts.append("\n  <h1>Architectures of Capital</h1><hr>\n")
 for s in STUDIES[5:]:
-    title      = s.get("title", "Untitled Study")
-    authors    = s.get("authors", "")
-    source     = s.get("source", "")
-    summary    = s.get("summary", "")
-    example    = s.get("example", "")
-    powerful   = s.get("why_powerful", "")
-    explain    = s.get("further_explanation", "")
-    projects   = s.get("projects", [])
-
-    proj_list = "\n".join(f"<li>{p}</li>" for p in projects)
-
+    proj_list = "\n".join(f"<li>{p}</li>" for p in s.get("projects",[]))
     parts.append(f"""
   <div class="study">
-    <h2>{title}</h2>
-    <span class="authors">Authors: {authors}</span>
-    <span class="source">Source: {source}</span>
+    <h2>{s.get("title","")}</h2>
+    <span class="authors">Authors: {s.get("authors","")}</span>
+    <span class="source">Source: {s.get("source","")}</span>
     <span class="label">Summary:</span>
-    <p>{summary}</p>
+    <p>{s.get("summary","")}</p>
     <span class="label">Example:</span>
-    <p>{example}</p>
+    <p>{s.get("example","")}</p>
     <span class="label">Why it’s powerful:</span>
-    <p>{powerful}</p>
+    <p>{s.get("why_powerful","")}</p>
     <span class="label">Further explanation:</span>
-    <p>{explain}</p>
+    <p>{s.get("further_explanation","")}</p>
     <span class="label">Projects using this:</span>
     <ul>
       {proj_list}
@@ -130,7 +114,8 @@ for s in STUDIES[5:]:
 
 parts.append(FOOTER)
 
-# ─── Write out the file ───────────────────────────────────────────────────────
 html = "".join(parts)
-Path("pages/index.html").write_text(html, encoding="utf-8")
-print("Rebuilt pages/index.html with", len(STUDIES), "studies")
+
+# ─── Write the file into the current directory (pages/) ───────────────────────
+Path("index.html").write_text(html, encoding="utf-8")
+print(f"Rebuilt index.html with {len(STUDIES)} studies")
