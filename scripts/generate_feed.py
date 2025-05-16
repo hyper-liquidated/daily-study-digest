@@ -1,111 +1,136 @@
 #!/usr/bin/env python3
 import json
-from datetime import datetime
+from pathlib import Path
 
-# ─── Helpers for date formatting ──────────────────────────────────────────────
-def format_pubdate(datestr):
-    """Convert YYYY-MM-DD → 'Wed, 14 May 2025 00:00:00 +0000' for RSS."""
-    dt = datetime.fromisoformat(datestr)
-    return dt.strftime("%a, %d %b %Y %H:%M:%S +0000")
+# ─── Load your daily studies from JSON ────────────────────────────────────────
+with open("data/studies.json", encoding="utf-8") as f:
+    STUDIES = json.load(f)
 
-def human_date(datestr):
-    """Convert YYYY-MM-DD → 'May 14, 2025' for display."""
-    dt = datetime.fromisoformat(datestr)
-    return dt.strftime("%B %-d, %Y")
-
-# ─── Load your generated studies.json ───────────────────────────────────────────
-with open("data/studies.json", "r", encoding="utf-8") as f:
-    studies = json.load(f)
-
-# ─── 1) Build the HTML page ────────────────────────────────────────────────────
-html = """<!DOCTYPE html>
-<html lang="en">
-<head>
+# ─── HTML header & shared CSS ────────────────────────────────────────────────
+HEADER = """<!DOCTYPE html>
+<html lang="en"><head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Daily Study Digest</title>
   <style>
-    body { font-family: sans-serif; line-height: 1.5; max-width: 800px; margin: 2em auto; padding: 0 1em; }
-    h1 { text-align: center; margin-bottom: 0.5em; }
-    .subscribe { text-align: right; margin-bottom: 2em; }
-    .subscribe a { font-weight: bold; text-decoration: none; }
-    .item { border-bottom: 1px solid #e0e0e0; padding-bottom: 1.5em; margin-bottom: 1.5em; }
-    .item h2 { margin: 0.2em 0; }
-    .meta { font-size: 0.9em; font-style: italic; color: #666; margin: 0.5em 0; }
-    .date { font-style: normal; color: #999; margin-left: 0.5em; }
-    ul.notable { margin-left: 1em; margin-bottom: 1em; }
-    ul.notable li { margin-bottom: 0.5em; }
+    :root {
+      --bg: #fff; --fg: #111; --link: #0066cc; --divider: #ccc;
+    }
+    body.dark-mode {
+      --bg: #121212; --fg: #e0e0e0; --link: #88c0d0; --divider: #444;
+    }
+    body {
+      margin:0; padding:2rem;
+      font-family:sans-serif;
+      background:var(--bg);
+      color:var(--fg);
+      line-height:1.5;
+    }
+    .toggle-btn {
+      position:fixed; top:1rem; right:1rem;
+      background:none; border:none; font-size:1.5rem; cursor:pointer;
+      color:var(--fg);
+    }
+    a { color:var(--link); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    h1 {
+      margin-top:4rem;
+      border-bottom:1px solid var(--divider);
+      padding-bottom:.3rem;
+    }
+    .study { margin-bottom:2rem; }
+    .study h2 {
+      margin:.5rem 0 .2rem;
+      font-size:1.2rem;
+      text-decoration:underline;
+    }
+    .source, .authors {
+      display:block; font-size:.9rem; color:gray;
+      margin-bottom:.2rem;
+    }
+    .label {
+      font-weight:bold; margin-top:1rem; display:block;
+    }
+    ul { margin:.5em 0 1em 1.5em; }
+    ul li { margin-bottom:.3em; }
+    hr { border:0; border-top:1px solid var(--divider); margin:2rem 0; }
   </style>
-</head>
-<body>
-  <h1>Daily Study Digest</h1>
-  <div class="subscribe">
-    <a href="daily_study_digest.xml">🔗 Subscribe via RSS</a>
-  </div>
+</head><body>
+  <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
+  <p><a href="archive.html">📚 View Past Daily Studies</a></p>
 """
 
-for s in studies:
-    title       = s["title"]
-    authors     = ", ".join(s.get("authors", []))
-    source      = s.get("source_url", s.get("source", ""))
-    summary     = s.get("summary", "")
-    why_list    = "\n".join(f"<li>{pt}</li>" for pt in s.get("why_it_matters", []))
-    date_display= human_date(s["date"])
+FOOTER = """
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    }
+    if (localStorage.theme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
+</body></html>"""
 
-    # Meta line under the title
-    meta_html = f'<p class="meta">{authors} ({source}) <span class="date">({date_display})</span></p>'
+# ─── Build HTML ────────────────────────────────────────────────────────────────
+parts = [HEADER]
 
-    html += f"""
-  <div class="item">
+# Track 1 header
+parts.append("  <h1>The Social Layer</h1><hr>\n")
+for s in STUDIES[:5]:
+    title = s.get("title", "Untitled Study")
+    authors = s.get("authors", "")
+    source  = s.get("source", "")
+    summary = s.get("summary", "")
+    notable = s.get("why_notable", s.get("notable", ""))
+
+    parts.append(f"""
+  <div class="study">
     <h2>{title}</h2>
-    {meta_html}
-    <p><strong>Summary:</strong> {summary}</p>
-    <p><strong>Why it’s notable:</strong></p>
-    <ul class="notable">
-{why_list}
+    <span class="authors">Authors: {authors}</span>
+    <span class="source">Source: {source}</span>
+    <span class="label">Summary:</span>
+    <p>{summary}</p>
+    <span class="label">Why it’s notable:</span>
+    <p>{notable}</p>
+  </div>""")
+
+# Track 2 header
+parts.append("\n  <h1>Architectures of Capital</h1><hr>\n")
+for s in STUDIES[5:]:
+    title      = s.get("title", "Untitled Study")
+    authors    = s.get("authors", "")
+    source     = s.get("source", "")
+    summary    = s.get("summary", "")
+    example    = s.get("example", "")
+    powerful   = s.get("why_powerful", "")
+    explain    = s.get("further_explanation", "")
+    projects   = s.get("projects", [])
+
+    proj_list = "\n".join(f"<li>{p}</li>" for p in projects)
+
+    parts.append(f"""
+  <div class="study">
+    <h2>{title}</h2>
+    <span class="authors">Authors: {authors}</span>
+    <span class="source">Source: {source}</span>
+    <span class="label">Summary:</span>
+    <p>{summary}</p>
+    <span class="label">Example:</span>
+    <p>{example}</p>
+    <span class="label">Why it’s powerful:</span>
+    <p>{powerful}</p>
+    <span class="label">Further explanation:</span>
+    <p>{explain}</p>
+    <span class="label">Projects using this:</span>
+    <ul>
+      {proj_list}
     </ul>
-  </div>
-"""
+  </div>""")
 
-html += """
-</body>
-</html>
-"""
+parts.append(FOOTER)
 
-with open("../index.html", "w", encoding="utf-8") as f:
-    f.write(html)
-
-# ─── 2) Build the RSS feed ─────────────────────────────────────────────────────
-items = []
-for s in studies:
-    title       = s["title"]
-    authors     = ", ".join(s.get("authors", []))
-    source      = s.get("source_url", s.get("source", ""))
-    summary     = s.get("summary", "")
-    pub_date    = format_pubdate(s["date"])
-    meta_line   = f"{authors} ({source})" if authors else source
-
-    item = f"""<item>
-  <title>{title}</title>
-  <description><![CDATA[
-{meta_line}
-
-{summary}
-  ]]></description>
-  <pubDate>{pub_date}</pubDate>
-</item>"""
-    items.append(item)
-
-rss = f"""<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
-<channel>
-  <title>Daily Study Digest – Track 1 + Track 2</title>
-  <link>https://hyper-liquidated.github.io/daily-study-digest/</link>
-  <description>Daily curated studies in behavioral science, crypto, and finance.</description>
-{''.join(items)}
-</channel>
-</rss>"""
-
-with open("../daily_study_digest.xml", "w", encoding="utf-8") as f:
-    f.write(rss)
-
-print(f"Generated {len(studies)} items: index.html and daily_study_digest.xml")
+# ─── Write out the file ───────────────────────────────────────────────────────
+html = "".join(parts)
+Path("pages/index.html").write_text(html, encoding="utf-8")
+print("Rebuilt pages/index.html with", len(STUDIES), "studies")
