@@ -1,71 +1,73 @@
 name: Auto Update Daily Study Feed
 
-# Give the workflow token write-access so it can push back to this repo
 permissions:
   contents: write
 
 on:
   schedule:
-    - cron: '0 9 * * *'      # 09 UTC → 05 AM ET (summer) / 04 AM ET (winter)
-  workflow_dispatch:         # manual trigger button
+    - cron: '0 9 * * *'      # 09:00 UTC = 05:00 AM ET daily
+  workflow_dispatch:
 
 jobs:
   update:
     runs-on: ubuntu-latest
 
     steps:
-    # ──────────────────────────────────────────────────────────────
-    # 1) Checkout THIS Pages repo
-    - name: Checkout pages repo
-      uses: actions/checkout@v3
-      with:
-        path: pages
-        persist-credentials: false   # prevents 403 when cloning source repo
+      # 1) Checkout this Pages repo without persisting the default token
+      - name: Checkout pages repo
+        uses: actions/checkout@v3
+        with:
+          path: pages
+          persist-credentials: false
 
-    # ──────────────────────────────────────────────────────────────
-    # 2) Checkout the SOURCE repo that contains the fresh studies.json
-    - name: Checkout study-source repo
-      uses: actions/checkout@v3
-      with:
-        repository: hyper-liquidated/study-source   # owner/repo of source
-        path: source
-        # If the source repo ever becomes PRIVATE, create a secret called
-        # SOURCE_PAT (scoped to `repo`) and uncomment the next line:
-        # token: ${{ secrets.SOURCE_PAT }}
+      # 2) Checkout the source repo containing data/studies.json
+      - name: Checkout study-source repo
+        uses: actions/checkout@v3
+        with:
+          repository: hyper-liquidated/study-source
+          token: ""                # anonymous clone (public repo)
+          path: source
 
-    # ──────────────────────────────────────────────────────────────
-    # 3) Copy the fresh JSON into this repo’s data folder
-    - name: Copy studies.json
-      run: cp source/data/studies.json pages/data/studies.json
+      # 3) Copy the fresh JSON into this repo’s data folder
+      - name: Copy studies.json
+        run: cp source/data/studies.json pages/data/studies.json
 
-    # ──────────────────────────────────────────────────────────────
-    # 4) Rebuild homepage & RSS
-    - name: Build homepage & RSS
-      run: |
-        cd pages
-        python scripts/generate_feed.py
+      # 4) Set up Python
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-    # ──────────────────────────────────────────────────────────────
-    # 5) Commit & push the changes (uses write-scoped GITHUB_TOKEN)
-    - name: Commit & publish
-      env:
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        REPO:  ${{ github.repository }}
-      run: |
-        cd pages
-        git config user.name  "github-actions[bot]"
-        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      # 5) Install required Python dependencies
+      - name: Install dependencies
+        run: pip install requests
 
-        git add data/studies.json index.html daily_study_digest.xml
+      # 6) Build homepage & RSS
+      - name: Build homepage & RSS
+        run: |
+          cd pages
+          python scripts/generate_feed.py
 
-        if ! git diff --cached --quiet; then
-          git commit -m "Auto-regenerate homepage"
+      # 7) Commit & publish if there are changes
+      - name: Commit & publish
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO:  ${{ github.repository }}
+        run: |
+          cd pages
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # authenticate push with the workflow token
-          git remote set-url origin \
-            https://x-access-token:${TOKEN}@github.com/${REPO}.git
+          git add data/studies.json index.html daily_study_digest.xml
 
-          git push origin HEAD:main
-        else
-          echo "No changes – nothing to push."
-        fi
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto-regenerate homepage"
+
+            # Embed the token into the remote URL for an authenticated push
+            git remote set-url origin \
+              https://x-access-token:${TOKEN}@github.com/${REPO}.git
+
+            git push origin HEAD:main
+          else
+            echo "No changes – nothing to push."
+          fi
