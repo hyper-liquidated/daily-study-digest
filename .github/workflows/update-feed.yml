@@ -1,11 +1,11 @@
 name: Auto Update Daily Study Feed
 
 permissions:
-  contents: write          # allow the default GITHUB_TOKEN to push
+  contents: write          # allow this workflow to push commits here
 
 on:
   schedule:
-    - cron: '0 10 * * *'   # 10 UTC → 05 EST / 06 EDT
+    - cron: '0 10 * * *'   # 10 UTC ≈ 05 EST / 06 EDT
   workflow_dispatch:
 
 jobs:
@@ -13,28 +13,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Check out this repo
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+    # 1) Check out *this* repo (keeps history so diff works)
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
-      # 2) Download the latest feed from the source repo (raw file URL)
-      - name: Download latest RSS feed
-        run: |
-          curl -fsSL -o daily_study_digest.xml \
-            https://raw.githubusercontent.com/hyper-liquidated/daily-study-digest-source/main/rss.xml
+    # 2) Check out the SOURCE repo that holds the feed
+    - name: Checkout feed source
+      uses: actions/checkout@v3
+      with:
+        repository: hyper-liquidated/daily-study-digest-source   # <-- adjust owner/repo if different
+        path: source                                             # clones into ./source
+        # If the source repo is PRIVATE, create a PAT secret called SOURCE_PAT
+        # then uncomment the next line:
+        # token: ${{ secrets.SOURCE_PAT }}
 
-      # 3) Commit & push only when the file changed
-      - name: Commit and push if changed
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+    # 3) Copy the latest XML into this repo’s root (or wherever you want)
+    - name: Copy feed file
+      run: |
+        cp source/path/to/daily_study_digest.xml .               # update path/to/… if needed
 
-          git add daily_study_digest.xml
-          if ! git diff --cached --quiet; then
-            git commit -m "Daily RSS update"
-            git push
-          else
-            echo "No changes – nothing to commit."
-          fi
+    # 4) Commit & push only when the file changed
+    - name: Commit and push if changed
+      run: |
+        git config user.name  "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+        git add daily_study_digest.xml
+        if ! git diff --cached --quiet; then
+          git commit -m "Daily RSS update"
+          git push
+        else
+          echo "No changes – nothing to commit."
+        fi
