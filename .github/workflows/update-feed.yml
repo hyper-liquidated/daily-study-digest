@@ -1,44 +1,42 @@
 name: Auto Update Daily Study Feed
 
+# Let the workflow’s default GITHUB_TOKEN commit to this repo
 permissions:
   contents: write
 
 on:
+  # Every day at 10 UTC  (≈ 06 EDT / 05 EST)
   schedule:
-    - cron: '0 10 * * *'      # 10 UTC ≈ 05 EST / 06 EDT
-  workflow_dispatch:
+    - cron: '0 10 * * *'
+  workflow_dispatch:        # manual “Run workflow” button
 
 jobs:
-  update-feed:
+  refresh-feed:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout this repo
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+      # 1) Check out THIS repository (daily-study-digest)
+      - name: Checkout target repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0          # keep history so git diff can compare
 
-    - name: Checkout feed source
-      uses: actions/checkout@v3
-      with:
-        repository: hyper-liquidated/daily-study-digest-source
-        ref: main                  # change if the default branch is ‘master’ etc.
-        path: source
-        # If the source repo is private, create a PAT secret called SOURCE_PAT
-        # and uncomment the next line:
-        # token: ${{ secrets.SOURCE_PAT }}
+      # 2) Download the latest feed from the live site
+      - name: Download latest feed
+        run: |
+          curl -fsSL -o daily_study_digest.xml \
+            https://hyper-liquidated.github.io/daily-study-digest/daily_study_digest.xml
 
-    - name: Copy feed file
-      run: cp source/path/to/daily_study_digest.xml .
+      # 3) Commit & push ONLY if the file changed
+      - name: Commit and push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-    - name: Commit & push if changed
-      run: |
-        git config user.name  "github-actions[bot]"
-        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git add daily_study_digest.xml
-        if ! git diff --cached --quiet; then
-          git commit -m "Daily RSS update"
-          git push
-        else
-          echo "No changes – nothing to commit."
-        fi
+          git add daily_study_digest.xml
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto-refresh daily_study_digest.xml"
+            git push
+          else
+            echo "No changes – nothing to commit."
+          fi
