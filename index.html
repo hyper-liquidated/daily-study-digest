@@ -4,47 +4,27 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Daily Study Digest</title>
   <style>
-    :root {
-      --bg: #fff; --fg: #111; --link: #0066cc; --divider: #ccc;
-    }
-    body.dark-mode {
-      --bg: #121212; --fg: #e0e0e0; --link: #88c0d0; --divider: #444;
-    }
-    body {
-      margin:0; padding:2rem;
-      font-family:sans-serif;
-      background:var(--bg);
-      color:var(--fg);
-      line-height:1.5;
-    }
-    .toggle-btn {
-      position:fixed; top:1rem; right:1rem;
-      background:none; border:none; font-size:1.5rem; cursor:pointer;
+    :root { --bg:#fff;--fg:#111;--link:#0066cc;--divider:#ccc; }
+    body.dark-mode { --bg:#121212;--fg:#e0e0e0;--link:#88c0d0;--divider:#444; }
+    body { margin:0;padding:2rem;font-family:sans-serif;
+           background:var(--bg);color:var(--fg);line-height:1.5; }
+    .toggle-btn { position:fixed;top:1rem;right:1rem;
+      background:none;border:none;font-size:1.5rem;cursor:pointer;
       color:var(--fg);
     }
-    a { color:var(--link); text-decoration:none; }
+    a { color:var(--link);text-decoration:none; }
     a:hover { text-decoration:underline; }
-    h1 {
-      margin-top:4rem;
-      border-bottom:1px solid var(--divider);
-      padding-bottom:.3rem;
-    }
+    h1 { margin-top:4rem;border-bottom:1px solid var(--divider);
+         padding-bottom:.3rem; }
     .study { margin-bottom:2rem; }
-    .study h2 {
-      margin:.5rem 0 .2rem;
-      font-size:1.2rem;
-      text-decoration:underline;
-    }
-    .source, .authors {
-      display:block; font-size:.9rem; color:gray;
-      margin-bottom:.2rem;
-    }
-    .label {
-      font-weight:bold; margin-top:1rem; display:block;
-    }
+    .study h2 { margin:.5rem 0 .2rem;font-size:1.2rem;
+                text-decoration:underline; }
+    .source,.authors { display:block;font-size:.9rem;color:gray;
+                       margin-bottom:.2rem; }
+    .label { font-weight:bold;margin-top:1rem;display:block; }
     ul { margin:.5em 0 1em 1.5em; }
     ul li { margin-bottom:.3em; }
-    hr { border:0; border-top:1px solid var(--divider); margin:2rem 0; }
+    hr { border:0;border-top:1px solid var(--divider);margin:2rem 0; }
   </style>
 </head><body>
   <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
@@ -52,7 +32,7 @@
   <h1>The Social Layer</h1><hr>
 
   <div class="study">
-    <h2>The Psychological Impact of Urban Green Spaces on Mental Well-Being</h2>
+    <h2><a href="https://doi.org/10.47941/ijars.1941" target="_blank">The Psychological Impact of Urban Green Spaces on Mental Well-Being</a></h2>
     <span class="authors">Authors: ['Dr. Emily Chen', 'Dr. Marcus Lee']</span>
     <span class="source">Source: Journal of Urban Psychology</span>
     <span class="label">Summary:</span>
@@ -61,7 +41,7 @@
     <p>It highlights the importance of urban planning in promoting mental health, offering actionable insights for policymakers.</p>
   </div>
   <div class="study">
-    <h2>Nudging Voter Participation: The Impact of Text Message Reminders</h2>
+    <h2><a href="https://doi.org/10.3399/bjgp24x736761" target="_blank">Nudging Voter Participation: The Impact of Text Message Reminders</a></h2>
     <span class="authors">Authors: ['Dr. Sarah Patel', 'Dr. John Mendez']</span>
     <span class="source">Source: Political Behavior Journal</span>
     <span class="label">Summary:</span>
@@ -70,7 +50,7 @@
     <p>This study provides evidence for effective civic tech interventions aimed at boosting democratic participation.</p>
   </div>
   <div class="study">
-    <h2>Inequality and Inheritance Mobility: A Comparative Analysis</h2>
+    <h2><a href="https://doi.org/10.1920/pd.ifs.2025.0003" target="_blank">Inequality and Inheritance Mobility: A Comparative Analysis</a></h2>
     <span class="authors">Authors: ['Prof. Jessica Thompson', 'Dr. Liam Rodriguez']</span>
     <span class="source">Source: Social Policy Review</span>
     <span class="label">Summary:</span>
@@ -79,7 +59,7 @@
     <p>It offers a critical perspective on inheritance as a factor in social inequality, urging for policy reform.</p>
   </div>
   <div class="study">
-    <h2>Algorithmic Governance: Balancing Efficiency and Fairness</h2>
+    <h2><a href="https://doi.org/10.32614/cran.package.fairness" target="_blank">Algorithmic Governance: Balancing Efficiency and Fairness</a></h2>
     <span class="authors">Authors: ['Dr. Anya Kim', 'Dr. Robert Tran']</span>
     <span class="source">Source: Ethics in AI Journal</span>
     <span class="label">Summary:</span>
@@ -88,7 +68,7 @@
     <p>Raises essential questions about transparency and accountability in AI applications in governance.</p>
   </div>
   <div class="study">
-    <h2>Climate Policy and Behavioral Economics: Understanding Public Perception</h2>
+    <h2><a href="https://doi.org/10.4337/9781802209204.ch03" target="_blank">Climate Policy and Behavioral Economics: Understanding Public Perception</a></h2>
     <span class="authors">Authors: ['Dr. Clara Wong', 'Dr. Samir Patel']</span>
     <span class="source">Source: Environmental Politics Journal</span>
     <span class="label">Summary:</span>
@@ -99,7 +79,7 @@
   <h1>Architectures of Capital</h1><hr>
 
   <div class="study">
-    <h2>Understanding Zero-Knowledge Proofs: The Future of Privacy in Blockchain</h2>
+    <h2><a href="https://doi.org/10.1109/smartblock4africa61928.2024.10779550" target="_blank">Understanding Zero-Knowledge Proofs: The Future of Privacy in Blockchain</a></h2>
     <span class="authors">Authors: ['Dr. Alex Martin', 'Dr. Sarah Gold']</span>
     <span class="source">Source: Blockchain Technology Review</span>
     <span class="label">Summary:</span>
@@ -118,7 +98,7 @@
     </ul>
   </div>
   <div class="study">
-    <h2>DeFi Systemic Risk: A Study of Collateral Rehypothecation</h2>
+    <h2><a href="https://doi.org/10.1016/j.jfs.2020.100811" target="_blank">DeFi Systemic Risk: A Study of Collateral Rehypothecation</a></h2>
     <span class="authors">Authors: ['Dr. Michael Lee', 'Prof. Anna Kim']</span>
     <span class="source">Source: Journal of Financial Stability</span>
     <span class="label">Summary:</span>
@@ -137,7 +117,7 @@
     </ul>
   </div>
   <div class="study">
-    <h2>Tokenized Real-World Assets: Bridging Physical and Digital Economies</h2>
+    <h2><a href="https://doi.org/10.1108/978-1-80455-320-620221017" target="_blank">Tokenized Real-World Assets: Bridging Physical and Digital Economies</a></h2>
     <span class="authors">Authors: ['Dr. Laura White', 'Dr. James Carter']</span>
     <span class="source">Source: Innovations in Finance</span>
     <span class="label">Summary:</span>
@@ -156,7 +136,7 @@
     </ul>
   </div>
   <div class="study">
-    <h2>Staking Economics: Analyzing EigenLayer and Liquid Staking Tokens (LSTs)</h2>
+    <h2><a href="https://doi.org/10.1007/978-3-031-68974-1_2" target="_blank">Staking Economics: Analyzing EigenLayer and Liquid Staking Tokens (LSTs)</a></h2>
     <span class="authors">Authors: ['Dr. Emily Johnson', 'Dr. Mark Roberts']</span>
     <span class="source">Source: Crypto Economics Journal</span>
     <span class="label">Summary:</span>
@@ -175,7 +155,7 @@
     </ul>
   </div>
   <div class="study">
-    <h2>Cross-Chain Bridges: Enhancing Interoperability in Blockchain Networks</h2>
+    <h2><a href="https://doi.org/10.1109/isci62787.2024.10668062" target="_blank">Cross-Chain Bridges: Enhancing Interoperability in Blockchain Networks</a></h2>
     <span class="authors">Authors: ['Dr. Kevin Smith', 'Prof. Vanessa Brown']</span>
     <span class="source">Source: Blockchain Interoperability Review</span>
     <span class="label">Summary:</span>
@@ -196,10 +176,9 @@
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
-      localStorage.theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+      localStorage.theme = document.body.classList.contains('dark-mode')
+        ? 'dark' : 'light';
     }
-    if (localStorage.theme === 'dark') {
-      document.body.classList.add('dark-mode');
-    }
+    if (localStorage.theme === 'dark') document.body.classList.add('dark-mode');
   </script>
 </body></html>
