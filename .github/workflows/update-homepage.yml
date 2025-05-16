@@ -1,73 +1,73 @@
 name: Auto Update Daily Study Feed
 
 permissions:
-  contents: write
+  contents: write     # grant write permission for git push
 
 on:
   schedule:
-    - cron: '0 9 * * *'      # 09:00 UTC = 05:00 AM ET daily
-  workflow_dispatch:
+    - cron: '0 9 * * *'  # 09:00 UTC = 05:00 AM ET
+  workflow_dispatch:     # allow manual runs
 
 jobs:
   update:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Checkout this Pages repo without persisting the default token
-      - name: Checkout pages repo
-        uses: actions/checkout@v3
-        with:
-          path: pages
-          persist-credentials: false
+    # 1) Checkout this Pages repo without keeping its default token
+    - name: Checkout pages repo
+      uses: actions/checkout@v3
+      with:
+        path: pages
+        persist-credentials: false
 
-      # 2) Checkout the source repo containing data/studies.json
-      - name: Checkout study-source repo
-        uses: actions/checkout@v3
-        with:
-          repository: hyper-liquidated/study-source
-          token: ""                # anonymous clone (public repo)
-          path: source
+    # 2) Checkout the SOURCE repo using your PAT
+    - name: Checkout study-source repo
+      uses: actions/checkout@v3
+      with:
+        repository: hyper-liquidated/study-source
+        token: ${{ secrets.SOURCE_PAT }}
+        path: source
 
-      # 3) Copy the fresh JSON into this repo’s data folder
-      - name: Copy studies.json
-        run: cp source/data/studies.json pages/data/studies.json
+    # 3) Copy the fresh JSON into pages/data
+    - name: Copy studies.json
+      run: cp source/data/studies.json pages/data/studies.json
 
-      # 4) Set up Python
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
+    # 4) Setup Python
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
 
-      # 5) Install required Python dependencies
-      - name: Install dependencies
-        run: pip install requests
+    # 5) Install required Python deps
+    - name: Install dependencies
+      run: pip install requests
 
-      # 6) Build homepage & RSS
-      - name: Build homepage & RSS
-        run: |
-          cd pages
-          python scripts/generate_feed.py
+    # 6) Build homepage & RSS
+    - name: Build homepage & RSS
+      run: |
+        cd pages
+        python scripts/generate_feed.py
 
-      # 7) Commit & publish if there are changes
-      - name: Commit & publish
-        env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO:  ${{ github.repository }}
-        run: |
-          cd pages
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+    # 7) Commit & publish any changes
+    - name: Commit & publish
+      env:
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REPO:  ${{ github.repository }}
+      run: |
+        cd pages
+        git config user.name  "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add data/studies.json index.html daily_study_digest.xml
+        git add data/studies.json index.html daily_study_digest.xml
 
-          if ! git diff --cached --quiet; then
-            git commit -m "Auto-regenerate homepage"
+        if ! git diff --cached --quiet; then
+          git commit -m "Auto-regenerate homepage"
 
-            # Embed the token into the remote URL for an authenticated push
-            git remote set-url origin \
-              https://x-access-token:${TOKEN}@github.com/${REPO}.git
+          # embed the GITHUB_TOKEN so this push is authenticated
+          git remote set-url origin \
+            https://x-access-token:${TOKEN}@github.com/${REPO}.git
 
-            git push origin HEAD:main
-          else
-            echo "No changes – nothing to push."
-          fi
+          git push origin HEAD:main
+        else
+          echo "No changes – nothing to push."
+        fi
