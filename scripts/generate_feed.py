@@ -16,10 +16,14 @@ if not DATA_FILE.exists():
 studies = json.loads(DATA_FILE.read_text(encoding="utf-8"))
 
 # ---------- 2. Group by track ------------------------------------------------
+# ---------- 2. Group by track ------------------------------------------------
 by_track = {}
 for entry in studies:
-    by_track.setdefault(entry["track"], []).append(entry)
-
+    if isinstance(entry, dict) and "track" in entry:
+        by_track.setdefault(entry["track"], []).append(entry)
+    else:
+        print(f"[WARN] Skipping malformed study entry: {entry!r}")
+        
 track_map = {
     "The Social Layer": "social-layer",
     "Architectures of Capital": "capital",
