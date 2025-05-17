@@ -156,7 +156,13 @@ html = f"""<!DOCTYPE html>
 """
 
 # ---------- 5. Write file ----------------------------------------------------
-out_path = Path("pages/index.html")
+from pathlib import Path
+
+# compute repo root
+repo_root = Path(__file__).parent.parent 
+
+# write into docs/index.html
+out_path = repo_root / "docs" / "index.html"
 out_path.parent.mkdir(parents=True, exist_ok=True)
 out_path.write_text(html, encoding="utf-8")
 print(f"[INFO] Wrote {out_path}")
