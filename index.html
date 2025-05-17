@@ -1,184 +1,223 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daily Study Digest</title>
   <style>
-    :root { --bg:#fff;--fg:#111;--link:#0066cc;--divider:#ccc; }
-    body.dark-mode { --bg:#121212;--fg:#e0e0e0;--link:#88c0d0;--divider:#444; }
-    body { margin:0;padding:2rem;font-family:sans-serif;
-           background:var(--bg);color:var(--fg);line-height:1.5; }
-    .toggle-btn { position:fixed;top:1rem;right:1rem;
-      background:none;border:none;font-size:1.5rem;cursor:pointer;
-      color:var(--fg);
-    }
-    a { color:var(--link);text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    h1 { margin-top:4rem;border-bottom:1px solid var(--divider);
-         padding-bottom:.3rem; }
-    .study { margin-bottom:2rem; }
-    .study h2 { margin:.5rem 0 .2rem;font-size:1.2rem;
-                text-decoration:underline; }
-    .source,.authors { display:block;font-size:.9rem;color:gray;
-                       margin-bottom:.2rem; }
-    .label { font-weight:bold;margin-top:1rem;display:block; }
-    ul { margin:.5em 0 1em 1.5em; }
-    ul li { margin-bottom:.3em; }
-    hr { border:0;border-top:1px solid var(--divider);margin:2rem 0; }
+    :root { --bg:#fff; --fg:#111; --accent:#0077ff; }
+    [data-theme="dark"] { --bg:#121212; --fg:#e5e5e5; --accent:#3399ff; }
+    body { margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--fg); }
+    header { padding:1rem;display:flex;justify-content:space-between;
+             align-items:center;border-bottom:1px solid var(--fg); }
+    .tabs { display:flex;flex-wrap:wrap;gap:0.5rem;padding:0 1rem; }
+    .tab-btn { cursor:pointer;padding:0.4rem 0.8rem;border:1px solid var(--fg);
+                border-radius:4px;background:none;color:var(--fg); }
+    .tab-btn.active { background:var(--accent);color:#fff; }
+    .track-panel { display:none;padding:1rem;animation:fade .2s ease-in-out; }
+    .track-panel.active { display:block; }
+    @keyframes fade { from{opacity:0} to{opacity:1} }
+    .set-default { margin:0.5rem 0 1rem;padding:0.3rem 0.6rem;border:1px solid var(--accent);
+                    background:none;color:var(--accent);cursor:pointer;border-radius:4px; }
+    .study-entry { border-bottom:1px solid var(--fg);padding:0.8rem 0; }
+    .study-entry h2 { margin:0 0 0.3rem;font-size:1.1rem; }
+    .label { font-weight:600; }
   </style>
-</head><body>
-  <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
-  <p><a href="archive.html">📚 View Past Daily Studies</a></p>
-  <h1>The Social Layer</h1><hr>
+</head>
+<body>
+<header>
+  <h1>Daily Study Digest</h1>
+  <button id="themeToggle" title="Toggle dark/light mode">🌙</button>
+</header>
 
-  <div class="study">
-    <h2><a href="https://doi.org/10.47941/ijars.1941" target="_blank">The Psychological Impact of Urban Green Spaces on Mental Well-Being</a></h2>
-    <span class="authors">Authors: ['Dr. Emily Chen', 'Dr. Marcus Lee']</span>
-    <span class="source">Source: Journal of Urban Psychology</span>
-    <span class="label">Summary:</span>
-    <p>This study examines how access to green spaces in urban environments can significantly reduce stress and improve mental health outcomes.</p>
-    <span class="label">Why it’s notable:</span>
-    <p>It highlights the importance of urban planning in promoting mental health, offering actionable insights for policymakers.</p>
-  </div>
-  <div class="study">
-    <h2><a href="https://doi.org/10.3399/bjgp24x736761" target="_blank">Nudging Voter Participation: The Impact of Text Message Reminders</a></h2>
-    <span class="authors">Authors: ['Dr. Sarah Patel', 'Dr. John Mendez']</span>
-    <span class="source">Source: Political Behavior Journal</span>
-    <span class="label">Summary:</span>
-    <p>Research shows that personalized text message reminders can increase voter turnout, especially among young voters.</p>
-    <span class="label">Why it’s notable:</span>
-    <p>This study provides evidence for effective civic tech interventions aimed at boosting democratic participation.</p>
-  </div>
-  <div class="study">
-    <h2><a href="https://doi.org/10.1920/pd.ifs.2025.0003" target="_blank">Inequality and Inheritance Mobility: A Comparative Analysis</a></h2>
-    <span class="authors">Authors: ['Prof. Jessica Thompson', 'Dr. Liam Rodriguez']</span>
-    <span class="source">Source: Social Policy Review</span>
-    <span class="label">Summary:</span>
-    <p>This paper explores how inheritance laws impact social mobility across different countries, revealing systemic inequalities.</p>
-    <span class="label">Why it’s notable:</span>
-    <p>It offers a critical perspective on inheritance as a factor in social inequality, urging for policy reform.</p>
-  </div>
-  <div class="study">
-    <h2><a href="https://doi.org/10.32614/cran.package.fairness" target="_blank">Algorithmic Governance: Balancing Efficiency and Fairness</a></h2>
-    <span class="authors">Authors: ['Dr. Anya Kim', 'Dr. Robert Tran']</span>
-    <span class="source">Source: Ethics in AI Journal</span>
-    <span class="label">Summary:</span>
-    <p>The article discusses the ethical implications of algorithmic decision-making in public policy and governance.</p>
-    <span class="label">Why it’s notable:</span>
-    <p>Raises essential questions about transparency and accountability in AI applications in governance.</p>
-  </div>
-  <div class="study">
-    <h2><a href="https://doi.org/10.4337/9781802209204.ch03" target="_blank">Climate Policy and Behavioral Economics: Understanding Public Perception</a></h2>
-    <span class="authors">Authors: ['Dr. Clara Wong', 'Dr. Samir Patel']</span>
-    <span class="source">Source: Environmental Politics Journal</span>
-    <span class="label">Summary:</span>
-    <p>This study investigates how behavioral insights can frame climate policy to enhance public acceptance and action.</p>
-    <span class="label">Why it’s notable:</span>
-    <p>It bridges behavioral economics and environmental policy, providing practical recommendations for policymakers.</p>
-  </div>
-  <h1>Architectures of Capital</h1><hr>
+<nav class="tabs" id="tabBar"><button class="tab-btn" data-track="social-layer">The Social Layer</button><button class="tab-btn" data-track="capital">Architectures of Capital</button><button class="tab-btn" data-track="play">Systems of Play</button><button class="tab-btn" data-track="health">The Health Layer</button><button class="tab-btn" data-track="horizons">Long Horizons</button><button class="tab-btn" data-track="state">The State Layer</button></nav>
+<section id="social-layer" class="track-panel">
+<button class="set-default">Set as Default Track</button>
+<div class="study-entry">
+<h2>The Impact of Green Spaces on Urban Mental Health: A Systematic Review</h2>
+<span class="label">Summary:</span><p>This study reviews the impact of urban green spaces on mental health, suggesting significant positive correlations between exposure to greenspaces and improved psychological well-being.</p>
+<span class="label">Why notable:</span><p>The research highlights the critical role of urban planning in public health, providing evidence for policymakers to integrate more greenery in urban development.</p>
+</div>
+<div class="study-entry">
+<h2>Scarcity Mindset: Cognitive Impact and Decision Making</h2>
+<span class="label">Summary:</span><p>Investigates how scarcity mentality affects cognitive function and decision-making, revealing that focus on immediate scarcity can impair long-term planning and productivity.</p>
+<span class="label">Why notable:</span><p>The findings have implications for economic policy and interventions aimed at improving decision-making among financially strained populations.</p>
+</div>
+<div class="study-entry">
+<h2>Algorithmic Governance in Smart Cities</h2>
+<span class="label">Summary:</span><p>Explores the application of algorithms in governance structures within smart cities, emphasizing data-driven decision-making and transparency.</p>
+<span class="label">Why notable:</span><p>This paper is critical as it addresses the integration of cutting-edge technology in urban governance which could redefine civic management.</p>
+</div>
+<div class="study-entry">
+<h2>Noise Pollution and Its Effects on Urban Well-being</h2>
+<span class="label">Summary:</span><p>Analyzes the various impacts of noise pollution on residents' well-being in urban environments, linking chronic noise exposure to mental health issues.</p>
+<span class="label">Why notable:</span><p>Provides evidence for stricter noise regulation in city planning, showcasing health impacts previously underestimated.</p>
+</div>
+<div class="study-entry">
+<h2>Participatory Sensor Networks for Urban Planning</h2>
+<span class="label">Summary:</span><p>Describes the use of participatory sensor networks in providing real-time data for urban planning, enhancing community involvement.</p>
+<span class="label">Why notable:</span><p>Innovative approach to urban planning, offering a model for increased public engagement and rapid adaptation to community needs.</p>
+</div>
+</section>
+<section id="capital" class="track-panel">
+<button class="set-default">Set as Default Track</button>
+<div class="study-entry">
+<h2>Zero-Knowledge Proofs and Their Role in Blockchain Scalability</h2>
+<span class="label">Summary:</span><p>Explores the technological underpinnings of zero-knowledge proofs and how they contribute to the scalability challenges in blockchain systems.</p>
+<span class="label">Why notable:</span><p>Zero-knowledge proofs are pivotal for privacy and scalability in blockchain technology, key to future-proofing the infrastructure.</p>
+<span class="label">Example:</span><p>Zero-Knowledge Proofs</p>
+<span class="label">Why powerful:</span><p>They enhance privacy while maintaining efficiency and verifiability without revealing user data.</p>
+<span class="label">Further explanation:</span><p>Zero-knowledge proofs allow for information verification without data exposure, essential for secure, scalable transactions.</p>
+<span class="label">Projects using this:</span><ul>
+<li>zk-SNARKs</li>
+<li>Zcash</li>
+<li>StarkNet</li>
+</ul>
+</div>
+<div class="study-entry">
+<h2>The Dynamics of Stablecoin Peg Mechanisms</h2>
+<span class="label">Summary:</span><p>This paper examines various stablecoin mechanisms, analyzing how different designs maintain pegs under stress conditions.</p>
+<span class="label">Why notable:</span><p>Understanding stablecoin dynamics is critical for market stability and overarching financial system resilience.</p>
+<span class="label">Example:</span><p>Stablecoin Peg Mechanisms</p>
+<span class="label">Why powerful:</span><p>These mechanisms are vital for ensuring that stablecoins remain pegged to fiat currencies, maintaining value stability in crypto markets.</p>
+<span class="label">Further explanation:</span><p>Stablecoin pegs are essential to blockchain ecosystems, facilitating price stability across decentralized finance.</p>
+<span class="label">Projects using this:</span><ul>
+<li>USDC</li>
+<li>DAI</li>
+<li>TerraUSD</li>
+</ul>
+</div>
+<div class="study-entry">
+<h2>Staking and Restaking Economics: A Market Analysis</h2>
+<span class="label">Summary:</span><p>Analyzes the financial and economic implications of staking services on blockchain platforms, exploring its implications for system security and investor returns.</p>
+<span class="label">Why notable:</span><p>The research offers insights into the emerging staking and restaking economies, providing a framework for future decentralized financial services.</p>
+<span class="label">Example:</span><p>Staking Economics</p>
+<span class="label">Why powerful:</span><p>Staking provides a mechanism for securing networks and incentivizing long-term participation in blockchain ecosystems.</p>
+<span class="label">Further explanation:</span><p>Staking plays a dual role in decentralization and security, critical for sustainable blockchain network development.</p>
+<span class="label">Projects using this:</span><ul>
+<li>Ethereum 2.0</li>
+<li>Cosmos</li>
+<li>EigenLayer</li>
+</ul>
+</div>
+<div class="study-entry">
+<h2>Cross-Chain Bridges and Blockchain Interoperability</h2>
+<span class="label">Summary:</span><p>This study explores technologies enabling blockchain interoperability via cross-chain bridges, enhancing the fluidity of digital assets across systems.</p>
+<span class="label">Why notable:</span><p>Cross-chain bridges represent a significant leap towards a unified blockchain ecosystem, mitigating siloed experiences in decentralized finance.</p>
+<span class="label">Example:</span><p>Cross-Chain Bridges</p>
+<span class="label">Why powerful:</span><p>Facilitate interoperability, enabling seamless asset transfers and synergy across multiple blockchain networks.</p>
+<span class="label">Further explanation:</span><p>Interoperability leads to more flexible, efficient, and integrated blockchain ecosystems, essential for mainstream adoption.</p>
+<span class="label">Projects using this:</span><ul>
+<li>Polkadot</li>
+<li>LayerZero</li>
+<li>IBC</li>
+</ul>
+</div>
+<div class="study-entry">
+<h2>The Role of MEV and Proposer-Builder Separation in Auction Design</h2>
+<span class="label">Summary:</span><p>Examines the implications of MEV (Maximum Extractable Value) and the separation between proposers and builders for auction design within blockchain systems.</p>
+<span class="label">Why notable:</span><p>As MEV rises in prominence, understanding its role in auction markets is critical to designing fairer, more efficient blockchain ecosystems.</p>
+<span class="label">Example:</span><p>MEV and Auction Design</p>
+<span class="label">Why powerful:</span><p>Addressing MEV is crucial for preventing exploitation in blockchain networks and ensuring fairness.</p>
+<span class="label">Further explanation:</span><p>Proposer-builder separation simplifies and enhances trust in auction process, reducing conflict of interest.</p>
+<span class="label">Projects using this:</span><ul>
+<li>Ethereum</li>
+<li>Flashbots</li>
+<li>Eden Network</li>
+</ul>
+</div>
+</section>
+<section id="play" class="track-panel">
+<button class="set-default">Set as Default Track</button>
+<div class="study-entry">
+<h2>Feedback Loops in Multiplayer Strategy Games</h2>
+<span class="label">Summary:</span><p>Explores the role of feedback loops in multiplayer strategy games, focusing on how they influence player decisions and game dynamics.</p>
+<span class="label">Why notable:</span><p>The study provides insights for enhancing player engagement and strategic depth in game design.</p>
+</div>
+<div class="study-entry">
+<h2>Economic Decision-Making in Simulated Worlds: Insights from League of Legends</h2>
+<span class="label">Summary:</span><p>Analyzes how players make in-game economic decisions in League of Legends, with implications for broader economic modeling.</p>
+<span class="label">Why notable:</span><p>The paper offers valuable perspectives on economic behavior in controlled virtual environments, informing real-world economic policies.</p>
+</div>
+</section>
+<section id="health" class="track-panel">
+<button class="set-default">Set as Default Track</button>
+<div class="study-entry">
+<h2>Effect of Sauna Use on Cardiovascular Health</h2>
+<span class="label">Summary:</span><p>Examines how regular sauna use influences cardiovascular biomarkers, showing potential benefits for heart health.</p>
+<span class="label">Why notable:</span><p>Provides practical insights into sauna as a non-invasive intervention for cardiovascular health improvement.</p>
+</div>
+<div class="study-entry">
+<h2>Exercise-Enhanced Neuroplasticity: A Review</h2>
+<span class="label">Summary:</span><p>Reviews literature on how exercise promotes neuroplasticity, highlighting underlying biological mechanisms and practical applications.</p>
+<span class="label">Why notable:</span><p>Elevates the role of physical exercise in cognitive health, potentially influencing public health initiatives.</p>
+</div>
+</section>
+<section id="horizons" class="track-panel">
+<button class="set-default">Set as Default Track</button>
+<div class="study-entry">
+<h2>Resilience Dynamics in Civilizational Systems</h2>
+<span class="label">Summary:</span><p>Investigates how complex civilizational systems manage resilience, using agent-based modeling to predict systemic shocks.</p>
+<span class="label">Why notable:</span><p>Offers forward-looking strategies for enhancing societal resilience against existential risks and systemic collapse.</p>
+</div>
+<div class="study-entry">
+<h2>AI Alignment and Its Impact on Foresight Models</h2>
+<span class="label">Summary:</span><p>Discusses how ensuring AI alignment with human values is crucial for the long-term development and integration of advanced AI systems.</p>
+<span class="label">Why notable:</span><p>As AI advances, this paper underscores the importance of alignment in preventing unforeseen negative consequences.</p>
+</div>
+</section>
+<section id="state" class="track-panel">
+<button class="set-default">Set as Default Track</button>
+<div class="study-entry">
+<h2>Digital Participation and Trust in Democratic Systems</h2>
+<span class="label">Summary:</span><p>Analyzes how technology enhances or undermines trust in democratic systems, considering the role of digital participation.</p>
+<span class="label">Why notable:</span><p>Provides timely insights into the balance between technological innovation and sustaining democratic integrity.</p>
+<span class="label">Lean:</span> Neutral<br>
+<span class="label">Counterpoint:</span><p>Describes both the risks and opportunities inherent in increased tech reliance in democratic systems.</p>
+</div>
+<div class="study-entry">
+<h2>Evaluating Cross-National Policy Implementation in Healthcare</h2>
+<span class="label">Summary:</span><p>Compares healthcare policy implementations across several progressive democracies, examining effectiveness and sustainability.</p>
+<span class="label">Why notable:</span><p>Valuable for understanding how different political environments inform public policy strategy.</p>
+<span class="label">Lean:</span> Left<br>
+<span class="label">Counterpoint:</span><p>Includes critiques from conservative think tanks, questioning the efficiency of expanded government-led initiatives.</p>
+</div>
+</section>
 
-  <div class="study">
-    <h2><a href="https://doi.org/10.1109/smartblock4africa61928.2024.10779550" target="_blank">Understanding Zero-Knowledge Proofs: The Future of Privacy in Blockchain</a></h2>
-    <span class="authors">Authors: ['Dr. Alex Martin', 'Dr. Sarah Gold']</span>
-    <span class="source">Source: Blockchain Technology Review</span>
-    <span class="label">Summary:</span>
-    <p>This article explains how zero-knowledge proofs can enhance privacy in blockchain transactions while maintaining security.</p>
-    <span class="label">Example:</span>
-    <p>Zcash</p>
-    <span class="label">Why it’s powerful:</span>
-    <p>Zcash utilizes zero-knowledge proofs to enable private transactions, setting a precedent for privacy-focused cryptocurrencies.</p>
-    <span class="label">Further explanation:</span>
-    <p>Zero-knowledge proofs allow one party to prove to another that a statement is true without revealing any additional information.</p>
-    <span class="label">Projects using this:</span>
-    <ul>
-      <li>Zcash</li>
-<li>Aztec Protocol</li>
-<li>StarkWare</li>
-    </ul>
-  </div>
-  <div class="study">
-    <h2><a href="https://doi.org/10.1016/j.jfs.2020.100811" target="_blank">DeFi Systemic Risk: A Study of Collateral Rehypothecation</a></h2>
-    <span class="authors">Authors: ['Dr. Michael Lee', 'Prof. Anna Kim']</span>
-    <span class="source">Source: Journal of Financial Stability</span>
-    <span class="label">Summary:</span>
-    <p>This research identifies the risks associated with collateral rehypothecation in DeFi, focusing on leverage chains and market volatility.</p>
-    <span class="label">Example:</span>
-    <p>Aave</p>
-    <span class="label">Why it’s powerful:</span>
-    <p>Aave allows users to borrow against collateral that can be reused, increasing liquidity but also risk.</p>
-    <span class="label">Further explanation:</span>
-    <p>Rehypothecation involves reusing collateral pledged by borrowers to secure loans, which can amplify risk during market downturns.</p>
-    <span class="label">Projects using this:</span>
-    <ul>
-      <li>Aave</li>
-<li>Compound</li>
-<li>MakerDAO</li>
-    </ul>
-  </div>
-  <div class="study">
-    <h2><a href="https://doi.org/10.1108/978-1-80455-320-620221017" target="_blank">Tokenized Real-World Assets: Bridging Physical and Digital Economies</a></h2>
-    <span class="authors">Authors: ['Dr. Laura White', 'Dr. James Carter']</span>
-    <span class="source">Source: Innovations in Finance</span>
-    <span class="label">Summary:</span>
-    <p>The paper discusses the potential of tokenizing real-world assets (RWAs) to enhance liquidity and fractional ownership in various markets.</p>
-    <span class="label">Example:</span>
-    <p>RealT</p>
-    <span class="label">Why it’s powerful:</span>
-    <p>RealT enables fractional ownership of real estate through tokenization, democratizing access to property investment.</p>
-    <span class="label">Further explanation:</span>
-    <p>Tokenization involves converting ownership of real-world assets into digital tokens on a blockchain, facilitating easier trade and ownership transfer.</p>
-    <span class="label">Projects using this:</span>
-    <ul>
-      <li>RealT</li>
-<li>CurioInvest</li>
-<li>Mattereum</li>
-    </ul>
-  </div>
-  <div class="study">
-    <h2><a href="https://doi.org/10.1007/978-3-031-68974-1_2" target="_blank">Staking Economics: Analyzing EigenLayer and Liquid Staking Tokens (LSTs)</a></h2>
-    <span class="authors">Authors: ['Dr. Emily Johnson', 'Dr. Mark Roberts']</span>
-    <span class="source">Source: Crypto Economics Journal</span>
-    <span class="label">Summary:</span>
-    <p>This article explores the economic implications of staking and restaking in Ethereum's evolving landscape, focusing on EigenLayer.</p>
-    <span class="label">Example:</span>
-    <p>EigenLayer</p>
-    <span class="label">Why it’s powerful:</span>
-    <p>EigenLayer allows users to restake their assets for additional security and rewards, enhancing the DeFi ecosystem.</p>
-    <span class="label">Further explanation:</span>
-    <p>Restaking enables users to utilize their staked assets in multiple ways, potentially increasing yields and security within the network.</p>
-    <span class="label">Projects using this:</span>
-    <ul>
-      <li>EigenLayer</li>
-<li>Lido Finance</li>
-<li>Rocket Pool</li>
-    </ul>
-  </div>
-  <div class="study">
-    <h2><a href="https://doi.org/10.1109/isci62787.2024.10668062" target="_blank">Cross-Chain Bridges: Enhancing Interoperability in Blockchain Networks</a></h2>
-    <span class="authors">Authors: ['Dr. Kevin Smith', 'Prof. Vanessa Brown']</span>
-    <span class="source">Source: Blockchain Interoperability Review</span>
-    <span class="label">Summary:</span>
-    <p>This paper analyzes the importance of cross-chain bridges in facilitating communication and transactions between different blockchain networks.</p>
-    <span class="label">Example:</span>
-    <p>Wrapped Bitcoin (WBTC)</p>
-    <span class="label">Why it’s powerful:</span>
-    <p>WBTC enables Bitcoin to be used in the Ethereum ecosystem, bridging two major blockchain networks effectively.</p>
-    <span class="label">Further explanation:</span>
-    <p>Cross-chain bridges allow assets and information to be transferred between different blockchain ecosystems, enhancing functionality and utility.</p>
-    <span class="label">Projects using this:</span>
-    <ul>
-      <li>Wrapped Bitcoin (WBTC)</li>
-<li>Polygon Bridge</li>
-<li>Thorchain</li>
-    </ul>
-  </div>
-  <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-      localStorage.theme = document.body.classList.contains('dark-mode')
-        ? 'dark' : 'light';
-    }
-    if (localStorage.theme === 'dark') document.body.classList.add('dark-mode');
-  </script>
-</body></html>
+<script>
+  // ---------- Theme toggle ----------
+  const themeBtn = document.getElementById('themeToggle');
+  function setTheme(t) {
+    document.documentElement.dataset.theme = t;
+    localStorage.theme = t;
+    themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  }
+  setTheme(localStorage.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  themeBtn.onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+
+  // ---------- Tabs ----------
+  const defaultTrack = localStorage.defaultTrack || 'social-layer';
+  const panels = document.querySelectorAll('.track-panel');
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.track === defaultTrack);
+  });
+  panels.forEach(p => p.classList.toggle('active', p.id === defaultTrack));
+
+  document.getElementById('tabBar').onclick = e => {
+    if (!e.target.matches('.tab-btn')) return;
+    const id = e.target.dataset.track;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === e.target));
+    panels.forEach(p => p.classList.toggle('active', p.id === id));
+  };
+
+  // ---------- Set as default ----------
+  document.querySelectorAll('.set-default').forEach(btn => {
+      btn.onclick = () => {
+          const id = btn.parentElement.id;
+          localStorage.defaultTrack = id;
+          alert(id.replace(/-/g,' ') + ' is now your default track');
+      };
+  });
+</script>
+</body>
+</html>
