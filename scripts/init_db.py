@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
-import sqlite3
 import os
+import psycopg2
 
-# Find the project root folder
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+# Read the DATABASE_URL from the environment
+DATABASE_URL = os.environ.get("DATABASE_URL")
+if not DATABASE_URL:
+    raise RuntimeError("Please set the DATABASE_URL environment variable")
 
-# Path where the database file will live
-db_path = os.path.join(BASE_DIR, "studies.db")
+# Connect to Postgres
+conn = psycopg2.connect(DATABASE_URL)
+cur = conn.cursor()
 
-# The instructions (schema) for creating our table
+# Schema: create table if it doesn't exist
 schema = """
 CREATE TABLE IF NOT EXISTS studies (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     track TEXT,
     title TEXT,
     authors TEXT,
@@ -27,17 +30,11 @@ CREATE TABLE IF NOT EXISTS studies (
 """
 
 def init_db():
-    # Connect to (or create) the database file
-    conn = sqlite3.connect(db_path)
-    cur = conn.cursor()
-
-    # Run the instructions above
-    cur.executescript(schema)
-
-    # Save changes and close the file
+    cur.execute(schema)
     conn.commit()
-    conn.close()
-    print(f"Database created or updated at: {db_path}")
+    print("Initialized Postgres database with studies table.")
 
 if __name__ == "__main__":
     init_db()
+    cur.close()
+    conn.close()
